@@ -53,6 +53,37 @@ interface Props {
     <script>
       import "@scripts/lenisSmoothScroll.js";
     </script>
+    <script is:inline>
+      // Disable right-click context menu (prevents inspect option)
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        return false;
+      });
+
+      // Disable F12 and other developer tools shortcuts
+      document.addEventListener('keydown', function(e) {
+        // Disable F12
+        if (e.key === 'F12' || e.keyCode === 123) {
+          e.preventDefault();
+          return false;
+        }
+        // Disable Ctrl+Shift+I (Developer Tools)
+        if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+          e.preventDefault();
+          return false;
+        }
+        // Disable Ctrl+Shift+J (Console)
+        if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+          e.preventDefault();
+          return false;
+        }
+        // Disable Ctrl+Shift+C (Inspect Element)
+        if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+          e.preventDefault();
+          return false;
+        }
+      });
+    </script>
   </head>
   <body
     class="bg-neutral-200 selection:bg-orange-400 selection:text-neutral-700 dark:bg-black flex flex-col min-h-screen"
