@@ -1,0 +1,94 @@
+{
+  "title": "Simple, Transparent Pricing",
+  "subTitle": "Choose the perfect plan for your business needs with Lumiro's flexible pricing options.",
+  "badge": "Best value",
+  "thirdOption": "Enterprise Solutions?",
+  "btnText": "Get a Custom Quote",
+
+  "starterKit": {
+    "name": "Basic",
+    "description": "Perfect for small businesses",
+    "price": "500",
+    "cents": "",
+    "billingFrequency": "৳ / monthly",
+    "yearlyPrice": "4,999",
+    "renewPrice": "500",
+    "features": [
+      "500 orders per month",
+      "Essential landing page features",
+      "Standard support",
+      "Basic customization",
+      "Monthly renew fee: 500 ৳"
+    ],
+    "purchaseBtnTitle": "Get Started",
+    "purchaseLink": "#"
+  },
+
+  "professionalToolbox": {
+    "name": "Regular",
+    "description": "Best for growing businesses",
+    "price": "1,000",
+    "cents": "",
+    "billingFrequency": "৳ / monthly",
+    "yearlyPrice": "7,999",
+    "renewPrice": "1,000",
+    "features": [
+      "1,500 orders per month",
+      "Advanced features",
+      "Priority support",
+      "Full customization",
+      "Analytics dashboard",
+      "Monthly renew fee: 1,000 ৳"
+    ],
+    "purchaseBtnTitle": "Get Started",
+    "purchaseLink": "#"
+  },
+
+  "premiumKit": {
+    "name": "Advance",
+    "description": "For established businesses",
+    "price": "1,500",
+    "cents": "",
+    "billingFrequency": "৳ / monthly",
+    "yearlyPrice": "11,999",
+    "renewPrice": "1,500",
+    "features": [
+      "3,000 orders per month",
+      "All premium features",
+      "24/7 priority support",
+      "Unlimited customization",
+      "Advanced analytics",
+      "API access",
+      "Monthly renew fee: 1,500 ৳"
+    ],
+    "purchaseBtnTitle": "Get Started",
+    "purchaseLink": "#"
+  },
+
+  "pricingTable": {
+    "headers": ["Plan", "Orders / Month", "Monthly (৳)", "Yearly (৳)", "ReNew Price"],
+    "rows": [
+      {
+        "plan": "Basic",
+        "orders": "500",
+        "monthly": "500",
+        "yearly": "4,999",
+        "renew": "500"
+      },
+      {
+        "plan": "Regular",
+        "orders": "1,500",
+        "monthly": "1,000",
+        "yearly": "7,999",
+        "renew": "1,000"
+      },
+      {
+        "plan": "Advance",
+        "orders": "3,000",
+        "monthly": "1,500",
+        "yearly": "11,999",
+        "renew": "1,500"
+      }
+    ]
+  }
+}

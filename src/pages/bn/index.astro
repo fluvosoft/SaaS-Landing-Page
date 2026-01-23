@@ -1,0 +1,144 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import HeroSection from "@components/sections/landing/HeroSection.astro";
+import HeroSectionAlt from "@components/sections/landing/HeroSectionAlt.astro";
+import ClientsSection from "@components/sections/landing/ClientsSection.astro";
+import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
+import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
+import TestimonialsSection from "@components/sections/testimonials/TestimonialsSection.astro";
+import PricingSection from "@components/sections/pricing/PricingSection.astro";
+import FAQ from "@components/sections/misc/FAQ.astro";
+import AnnouncementBanner from "@components/ui/banners/AnnouncementBanner.astro";
+import heroImage from "@images/Hero_right_side.png";
+import faqs from "@data/bn/faqs.json";
+import features from "@data/bn/features.json";
+import pricing from "@data/bn/pricing.json";
+import carousel5 from "@images/carosel/carosel_5.jpeg";
+import carousel6 from "@images/carosel/carosel_6.png";
+import carousel7 from "@images/carosel/carosel_7.png";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { partnersData } from "@/data_files/constants";
+
+const avatarSrcs: Array<string> = [
+  "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80",
+  "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+];
+---
+
+<MainLayout lang="bn">
+  <AnnouncementBanner
+    btnId="dismiss-button"
+    btnTitle="GitHub এ Lumiro দেখুন"
+    url="https://github.com/"
+  />
+
+  <HeroSection
+    title=`<span class="text-orange-500 dark:text-orange-400">Lumiro</span> দিয়ে আপনার ব্যবসার ল্যান্ডিং পেজ তৈরি করুন`
+    subTitle="আধুনিক ডিজাইন উপাদান এবং নির্বিঘ্ন কাস্টমাইজেশন সহ আপনার ব্যবসার জন্য পেশাদার ল্যান্ডিং পেজ টেমপ্লেট।"
+    primaryBtn="অন্বেষণ শুরু করুন"
+    primaryBtnURL={getRelativeLocaleUrl("bn", "products")}
+    secondaryBtn="বিক্রয় দলের সাথে যোগাযোগ করুন"
+    secondaryBtnURL={getRelativeLocaleUrl("bn", "contact")}
+    withReview={true}
+    avatars={avatarSrcs}
+    rating=`<span class="font-bold">4.8</span> / 5`
+    starCount={4}
+    reviews=`<span class="font-bold">12.8k</span> এর বেশি রিভিউ থেকে`
+    src={heroImage}
+    alt="Lumiro ল্যান্ডিং পেজ টেমপ্লেট"
+  />
+
+  <ClientsSection
+    title="শিল্প নেতাদের দ্বারা বিশ্বস্ত"
+    subTitle="শিল্প জায়ান্টদের দ্বারা নির্বাচিত নির্ভরযোগ্যতা অনুভব করুন।"
+    partners={partnersData}
+  />
+
+  <FeaturesGeneral
+    title="কেন Lumiro বেছে নিবেন?"
+    subTitle="Lumiro একটি পেশাদার ল্যান্ডিং পেজ তৈরি করার জন্য আপনার যা কিছু প্রয়োজন তা সরবরাহ করে। আধুনিক ডিজাইন উপাদান, নির্বিঘ্ন কাস্টমাইজেশন এবং সম্পূর্ণ ডকুমেন্টেশন সহ, আপনার নিখুঁত ওয়েবসাইট তৈরি করা কখনও এত সহজ ছিল না।"
+    alt="Lumiro ল্যান্ডিং পেজ টেমপ্লেটের বৈশিষ্ট্য"
+    features={features}
+  />
+
+  <FeaturesNavs
+    title=`<span class="text-orange-500 dark:text-orange-400">Lumiro</span> দিয়ে আপনার নিখুঁত ল্যান্ডিং পেজ তৈরি করুন`
+    tabs={[
+      {
+        heading: "আধুনিক উপাদান",
+        content:
+          "Lumiro এর পূর্বনির্মিত আধুনিক UI উপাদানগুলির সাথে চমৎকার ল্যান্ডিং পেজ তৈরি করুন। প্রতিটি উপাদান সাবধানে ডিজাইন করা হয়েছে এবং ব্যবহারের জন্য প্রস্তুত, আপনার সময় বাঁচায় এবং পেশাদার ফলাফল নিশ্চিত করে।",
+        svg: "tools",
+        src: carousel5,
+        alt: "ল্যান্ডিং পেজের জন্য আধুনিক UI উপাদান",
+        first: true,
+      },
+      {
+        heading: "সহজ কাস্টমাইজেশন",
+        content:
+          "Lumiro এর নমনীয় টেমপ্লেট স্ট্রাকচার দিয়ে সহজেই আপনার ল্যান্ডিং পেজ কাস্টমাইজ করুন। জটিল কোডিং ছাড়াই আপনার ব্র্যান্ডের সাথে মেলে রঙ, লেআউট এবং কনটেন্ট সামঞ্জস্য করুন।",
+        svg: "dashboard",
+        src: carousel6,
+        alt: "সহজ কাস্টমাইজেশন ইন্টারফেস",
+        second: true,
+      },
+      {
+        heading: "পেশাদার ডিজাইন",
+        content:
+          "Lumiro এর ব্যবহারকারী-কেন্দ্রিক ডিজাইন পদ্ধতির সাথে চমৎকার ল্যান্ডিং পেজ তৈরি করুন। প্রতিটি উপাদান সুন্দর নান্দনিকতা এবং ব্যতিক্রমী কার্যকারিতা উভয়ই প্রদানের জন্য তৈরি করা হয়েছে।",
+        svg: "house",
+        src: carousel7,
+        alt: "পেশাদার ল্যান্ডিং পেজ ডিজাইন",
+      },
+    ]}
+  />
+
+  <TestimonialsSection
+    title="দ্রুত তৈরি করুন, শীঘ্রই চালু করুন"
+    subTitle="Lumiro এর সাথে, কয়েক মিনিটের মধ্যে আপনার ব্যবসার ল্যান্ডিং পেজ চালু করুন। আমাদের ব্যবহার-প্রস্তুত টেমপ্লেট দিয়ে আধুনিক ওয়েব উন্নয়নের গতি অনুভব করুন।"
+    testimonials={[
+      {
+        content:
+          "Lumiro আমাদের ওয়েব উপস্থিতি রূপান্তরিত করেছে! সেটআপ অবিশ্বাস্যভাবে দ্রুত ছিল এবং কাস্টমাইজেশন বিকল্পগুলি ব্যতিক্রমী। আমরা মাত্র কয়েক ঘন্টার মধ্যে আমাদের ল্যান্ডিং পেজ চালু করেছি। দ্রুত একটি পেশাদার ওয়েবসাইট তৈরি করতে চাওয়া সকলের জন্য অত্যন্ত সুপারিশকৃত!",
+        author: "Samantha Ruiz",
+        role: "মার্কেটিং পরিচালক | TechStart Inc.",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+      },
+    ]}
+    statistics={[
+      {
+        count: "10k+",
+        description:
+          "ওয়েবসাইট তৈরি হয়েছে — স্টার্টআপ থেকে প্রতিষ্ঠিত কোম্পানি পর্যন্ত",
+      },
+      {
+        count: "50%",
+        description:
+          "Lumiro এর পূর্বনির্মিত উপাদানগুলির সাথে দ্রুত উন্নয়নের সময়",
+      },
+      {
+        count: "95%",
+        description:
+          "Lumiro টেমপ্লেট ব্যবহারকারী ডেভেলপারদের দ্বারা রিপোর্ট করা সন্তুষ্টির হার",
+      },
+      {
+        count: "3x",
+        description: "ব্যবহার-প্রস্তুত ল্যান্ডিং পেজগুলির সাথে দ্রুত বাজারে আসা",
+      },
+    ]}
+  />
+
+  <PricingSection pricing={pricing} />
+
+  <FAQ title="প্রায়শই<br />জিজ্ঞাসিত প্রশ্ন" faqs={faqs} />
+
+  <HeroSectionAlt
+    title="আপনার স্বপ্নের ল্যান্ডিং পেজ চালু করতে প্রস্তুত?"
+    subTitle="Lumiro একটি পেশাদার ল্যান্ডিং পেজ টেমপ্লেট, Astro, Tailwind CSS এবং Preline UI ফ্রেমওয়ার্ক দিয়ে সাবধানে তৈরি। আধুনিক ডিজাইন উপাদান এবং নির্বিঘ্ন কাস্টমাইজেশন সহ আপনার ব্যবসার ল্যান্ডিং পেজ তৈরি করুন।"
+    url="#"
+  />
+</MainLayout>

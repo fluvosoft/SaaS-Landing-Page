@@ -1,0 +1,102 @@
+---
+import { Image } from "astro:assets";
+import carousel1 from "@images/carosel/carosel_1.jpeg";
+import carousel2 from "@images/carosel/carosel_2.jpeg";
+import carousel3 from "@images/carosel/carosel_3.jpeg";
+import carousel4 from "@images/carosel/carosel_4.jpeg";
+import carousel5 from "@images/carosel/carosel_5.jpeg";
+
+const carouselImages = [carousel1, carousel2, carousel3, carousel4, carousel5];
+// Duplicate images for seamless infinite scroll
+const duplicatedImages = [...carouselImages, ...carouselImages];
+---
+
+<section class="mx-auto max-w-[85rem] overflow-hidden px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+  <div class="carousel-container">
+    <div class="carousel-gradient-left"></div>
+    <div class="carousel-track">
+      {duplicatedImages.map((image, index) => (
+        <div class="carousel-item">
+          <Image
+            src={image}
+            alt={`Carousel image ${(index % carouselImages.length) + 1}`}
+            class="h-full w-full object-cover"
+            draggable="false"
+          />
+        </div>
+      ))}
+    </div>
+    <div class="carousel-gradient-right"></div>
+  </div>
+</section>
+
+<style>
+  .carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 1rem;
+    animation: scroll 30s linear infinite;
+    will-change: transform;
+  }
+
+  .carousel-item {
+    flex-shrink: 0;
+    width: 300px;
+    height: 200px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  @media (min-width: 640px) {
+    .carousel-item {
+      width: 400px;
+      height: 250px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-item {
+      width: 500px;
+      height: 300px;
+    }
+  }
+
+  .carousel-gradient-left,
+  .carousel-gradient-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .carousel-gradient-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.3), transparent);
+  }
+
+  .carousel-gradient-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(59, 130, 246, 0.3), transparent);
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+</style>

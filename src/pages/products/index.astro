@@ -1,0 +1,142 @@
+---
+// Importing necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
+import CardSmall from "@components/ui/cards/CardSmall.astro";
+import CardWide from "@components/ui/cards/CardWide.astro";
+import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
+import TestimonialsSectionAlt from "@components/sections/testimonials/TestimonialsSectionAlt.astro";
+
+// Importing necessary functions from Astro
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { SITE } from "@data/constants";
+
+// Fetching all the product related content and sorting it by main.id
+const product: CollectionEntry<"products">[] = (
+  await getCollection("products", ({ id }) => {
+    return id.startsWith("en/");
+  })
+).sort(
+  (a: CollectionEntry<"products">, b: CollectionEntry<"products">) =>
+    a.data.main.id - b.data.main.id
+);
+
+// Define variables for page content
+const title: string = "Products";
+const subTitle: string =
+  "Explore Lumiro's professional landing page templates and components, designed for businesses of all sizes. Each template is crafted with modern design principles and built for performance, ensuring you have the perfect solution for your online presence.";
+
+// Testimonial data that will be rendered in the component
+const testimonials = [
+  // First testimonial data
+  {
+    content:
+      " \"Since switching to Lumiro's landing page templates, our online conversion rates have skyrocketed. The modern design components and seamless customization options are simply unmatched. It's refreshing to work with a template that truly understands the needs of modern businesses.\" ",
+    author: "Jason Clark",
+    role: "Marketing Director | TechStart Inc.",
+    avatarSrc:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+    avatarAlt: "Image Description",
+  },
+  // Second testimonial data
+  {
+    content:
+      " \"As a startup founder, I'm always looking for high-quality templates that help bring my vision to life quickly. Lumiro's component library has been a game-changer for our projects, providing the perfect blend of modern design and functionality. The outstanding documentation and support were just the cherry on top!\" ",
+    author: "Maria Gonzalez",
+    role: "Founder | Creative Spaces",
+    avatarSrc:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+    avatarAlt: "Image Description",
+  },
+  // Third testimonial data
+  {
+    content:
+      " \"I've been building websites for over 15 years, and I can sincerely say that Lumiro's landing page templates are some of the best I've used. They're beautifully designed, perform flawlessly, and the customization options are extensive. Plus, the support is impeccable – they truly care about your project's success.\" ",
+    author: "Richard Kim",
+    role: "Web Developer | Digital Agency",
+    avatarSrc:
+      "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+    avatarAlt: "Image Description",
+  },
+];
+
+const pageTitle: string = `Products | ${SITE.title}`;
+const metaDescription =
+  "Explore Lumiro's professional landing page templates and components, designed for businesses of all sizes.";
+const ogTitle = "Landing Page Templates | Lumiro";
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={ogTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://screwfast.uk/products",
+    url: "https://screwfast.uk/products",
+    name: "Landing Page Templates | Lumiro",
+    description:
+      "Explore Lumiro's professional landing page templates and components, designed for businesses of all sizes.",
+    isPartOf: {
+      "@type": "WebSite",
+      url: "https://screwfast.uk",
+      name: "Lumiro",
+      description:
+        "Lumiro offers professional landing page templates with modern design components and seamless customization for your business.",
+    },
+    inLanguage: "en-US",
+  }}
+>
+  <div
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
+      <div class="flex items-center gap-12">
+        <h1
+          class="text-2xl font-bold tracking-tight text-balance text-neutral-800 md:text-4xl md:leading-tight dark:text-neutral-200"
+        >
+          {title}
+        </h1>
+        {
+          subTitle && (
+            <p class="hidden max-w-(--breakpoint-sm) text-pretty text-neutral-600 md:block dark:text-neutral-400">
+              {subTitle}
+            </p>
+          )
+        }
+      </div>
+      <PrimaryCTA title="Customer Stories" url="#testimonials" noArrow={true} />
+    </div>
+    {/* Displaying products in alternating styles. Alternative product gets different card styling.
+    Maps through all product entries and displays them with either CardSmall or CardWide based on their position. */}
+    <section class="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6 xl:gap-8">
+      {
+        product.map((product, index) => {
+          const position = index % 4;
+          if (position === 0 || position === 3) {
+            return <CardSmall product={product} />;
+          } else {
+            return <CardWide product={product} />;
+          }
+        })
+      }
+    </section>
+  </div>
+  {/* Features statistics section */}
+  <FeaturesStatsAlt
+    title="Why Choose Lumiro?"
+    subTitle="Transform your business ideas into stunning online presence with Lumiro templates. Whether you're starting a new business or redesigning your website, our templates are designed to help you build professional landing pages with confidence."
+    benefits={[
+      "Modern and responsive templates for exceptional performance.",
+      "Innovative design components tailored to modern business needs.",
+      "Dedicated support to ensure your landing page's success.",
+    ]}
+  />
+  {/* Testimonials section */}
+  <TestimonialsSectionAlt
+    title="What Our Customers Say"
+    testimonials={testimonials}
+  />
+</MainLayout>
