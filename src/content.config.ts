@@ -6,7 +6,7 @@ import { glob } from 'astro/loaders';
 
 const productsCollection = defineCollection({
   loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/products" }),
-    schema: ({ image }) => z.object({
+    schema: () => z.object({
     title: z.string(),
     description: z.string(),
     main: z.object({

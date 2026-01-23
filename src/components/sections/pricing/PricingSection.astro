@@ -20,30 +20,6 @@ type Product = {
   purchaseLink: string;
 };
 
-interface PricingSectionProps {
-  title: string;
-  subTitle: string;
-  badge: string;
-  thirdOption: string;
-  btnText: string;
-  pricing: {
-    title: string;
-    subTitle: string;
-    starterKit: Product;
-    professionalToolbox: Product;
-    premiumKit?: Product;
-    pricingTable?: {
-      headers: string[];
-      rows: Array<{
-        plan: string;
-        orders: string;
-        monthly: string;
-        yearly: string;
-        renew: string;
-      }>;
-    };
-  };
-}
 ---
 
 <section
@@ -214,7 +190,7 @@ interface PricingSectionProps {
         </tr>
       </thead>
       <tbody class="divide-y divide-neutral-200 bg-white dark:divide-neutral-700 dark:bg-neutral-900">
-        {pricing.pricingTable.rows.map((row) => (
+        {pricing.pricingTable.rows.map((row: { plan: string; orders: string; monthly: string; yearly: string; renew: string }) => (
           <tr>
             <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-neutral-900 dark:text-neutral-100">
               {row.plan}

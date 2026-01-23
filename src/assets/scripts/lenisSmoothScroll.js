@@ -4,6 +4,7 @@ import Lenis from "lenis";
 
 // Script to handle Lenis library settings for smooth scrolling
 // https://github.com/darkroomengineering/lenis
-const lenis = new Lenis({
+// Lenis instance is created for side effects (autoRaf: true enables automatic RAF)
+new Lenis({
     autoRaf: true,
 });
