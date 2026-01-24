@@ -64,20 +64,20 @@ async function submitContactForm(data: {
       timestamp: serverTimestamp(),
     };
 
-    // Push data to Realtime Database (with timeout)
+    // Push data to Realtime Database (with longer timeout - 20 seconds)
     const contactRef = ref(db, 'contactSubmissions');
     const newContactRef = push(contactRef);
     
-    const timeoutPromise = new Promise((_, reject) => 
-      setTimeout(() => reject(new Error('Request timeout. Please try again.')), 10000)
+    const writeTimeout = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Write timeout')), 20000)
     );
     
-    await Promise.race([set(newContactRef, submissionData), timeoutPromise]);
+    await Promise.race([set(newContactRef, submissionData), writeTimeout]);
     
     return newContactRef.key || '';
   } catch (error: any) {
     console.error('Contact form submission error:', error);
-    if (error.message.includes('timeout')) {
+    if (error.message.includes('timeout') || error.message.includes('Write timeout')) {
       throw new Error('Connection timeout. Please check your internet connection and try again.');
     } else if (error.message.includes('PERMISSION_DENIED')) {
       throw new Error('Permission denied. Please check Firebase security rules.');

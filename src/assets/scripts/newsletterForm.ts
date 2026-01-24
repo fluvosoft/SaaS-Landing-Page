@@ -45,23 +45,34 @@ async function submitNewsletterSubscription(email: string, source: string = 'foo
   const emailLower = email.toLowerCase().trim();
 
   try {
-    // Check for duplicate email (with timeout)
     const subscriptionsRef = ref(db, 'newsletterSubscriptions');
-    const emailQuery = query(
-      subscriptionsRef,
-      orderByChild('email'),
-      equalTo(emailLower)
-    );
     
-    // Add timeout for the query
-    const timeoutPromise = new Promise((_, reject) => 
-      setTimeout(() => reject(new Error('Request timeout. Please try again.')), 10000)
-    );
-    
-    const snapshot = await Promise.race([get(emailQuery), timeoutPromise]) as any;
-    
-    if (snapshot.exists()) {
-      throw new Error('This email is already subscribed');
+    // Try to check for duplicate email (optional - skip if it fails)
+    try {
+      const emailQuery = query(
+        subscriptionsRef,
+        orderByChild('email'),
+        equalTo(emailLower)
+      );
+      
+      // Shorter timeout for duplicate check (5 seconds)
+      const duplicateCheckTimeout = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Duplicate check timeout')), 5000)
+      );
+      
+      const snapshot = await Promise.race([get(emailQuery), duplicateCheckTimeout]) as any;
+      
+      if (snapshot.exists()) {
+        throw new Error('This email is already subscribed');
+      }
+    } catch (duplicateError: any) {
+      // If duplicate check fails due to timeout or permission, continue anyway
+      // Only throw if it's actually a duplicate
+      if (duplicateError.message.includes('already subscribed')) {
+        throw duplicateError;
+      }
+      // Otherwise, log and continue (duplicate check is optional)
+      console.warn('Duplicate check failed, continuing with subscription:', duplicateError);
     }
 
     // Prepare subscription data with timestamp
@@ -71,14 +82,18 @@ async function submitNewsletterSubscription(email: string, source: string = 'foo
       source: source,
     };
 
-    // Push data to Realtime Database (with timeout)
+    // Push data to Realtime Database (with longer timeout - 20 seconds)
     const newSubscriptionRef = push(subscriptionsRef);
-    await Promise.race([set(newSubscriptionRef, subscriptionData), timeoutPromise]);
+    const writeTimeout = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Write timeout')), 20000)
+    );
+    
+    await Promise.race([set(newSubscriptionRef, subscriptionData), writeTimeout]);
     
     return newSubscriptionRef.key || '';
   } catch (error: any) {
     console.error('Newsletter subscription error:', error);
-    if (error.message.includes('timeout')) {
+    if (error.message.includes('timeout') || error.message.includes('Write timeout')) {
       throw new Error('Connection timeout. Please check your internet connection and try again.');
     } else if (error.message.includes('PERMISSION_DENIED')) {
       throw new Error('Permission denied. Please check Firebase security rules.');
