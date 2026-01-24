@@ -1,6 +1,6 @@
 // Client-side script for handling newsletter subscription form
 
-import { submitNewsletterSubscription, type NewsletterFormData } from '../../lib/firebase/firestore';
+import { submitNewsletterSubscription, type NewsletterFormData } from '../../lib/firebase/database';
 
 export function initNewsletterForm(inputId: string = 'footer-input', buttonSelector: string = '.newsletter-submit') {
   const emailInput = document.getElementById(inputId) as HTMLInputElement;

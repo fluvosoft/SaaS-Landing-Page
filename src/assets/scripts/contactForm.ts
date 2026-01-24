@@ -1,6 +1,6 @@
 // Client-side script for handling contact form submission
 
-import { submitContactForm, type ContactFormData } from '../../lib/firebase/firestore';
+import { submitContactForm, type ContactFormData } from '../../lib/firebase/database';
 
 export function initContactForm(formId: string = 'contact-form') {
   const form = document.getElementById(formId) as HTMLFormElement;

@@ -209,8 +209,8 @@
 
       // Disable image selection
       img.style.userSelect = 'none';
-      img.style.webkitUserSelect = 'none';
-      img.style.webkitTouchCallout = 'none';
+      (img.style as any).webkitUserSelect = 'none';
+      (img.style as any).webkitTouchCallout = 'none';
       img.style.pointerEvents = 'auto'; // Keep images clickable for functionality
     });
   }
@@ -341,7 +341,7 @@
   }, true);
 
   // Prevent image save via browser menu
-  document.addEventListener('beforeunload', function(e) {
+  document.addEventListener('beforeunload', function() {
     // This makes it harder to save images
   });
 
