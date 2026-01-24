@@ -6,20 +6,6 @@ import Icon from "@components/ui/icons/Icon.astro";
 // Define props from Astro
 const { pricing } = Astro.props;
 
-// Define TypeScript type for products.
-type Product = {
-  name: string;
-  description: string;
-  price: string;
-  cents: string;
-  billingFrequency: string;
-  yearlyPrice?: string;
-  renewPrice?: string;
-  features: Array<string>;
-  purchaseBtnTitle: string;
-  purchaseLink: string;
-};
-
 ---
 
 <section
