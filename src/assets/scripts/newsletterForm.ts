@@ -120,7 +120,7 @@ export function initNewsletterForm(inputId: string = 'footer-input', buttonSelec
 
   if (!successMessage) {
     successMessage = document.createElement('p');
-    successMessage.className = 'newsletter-success mt-2 text-sm text-green-600 dark:text-white';
+    successMessage.className = 'newsletter-success mt-2 text-sm text-green-600 dark:!text-white';
     successMessage.style.display = 'none';
     emailInput.parentElement?.parentElement?.appendChild(successMessage);
   }
@@ -175,6 +175,10 @@ export function initNewsletterForm(inputId: string = 'footer-input', buttonSelec
       // Show success message
       successMessage.textContent = 'Thank you for subscribing!';
       successMessage.style.display = 'block';
+      // Ensure white text in dark mode
+      if (document.documentElement.classList.contains('dark')) {
+        successMessage.style.color = '#ffffff';
+      }
 
       // Clear input
       emailInput.value = '';

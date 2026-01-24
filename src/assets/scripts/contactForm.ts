@@ -143,6 +143,10 @@ export function initContactForm(formId: string = 'contact-form') {
       if (successMessage) {
         successMessage.textContent = 'Thank you! Your message has been sent. We\'ll get back to you soon.';
         successMessage.style.display = 'block';
+        // Ensure white text in dark mode
+        if (document.documentElement.classList.contains('dark')) {
+          successMessage.style.color = '#ffffff';
+        }
       }
 
       // Reset form
