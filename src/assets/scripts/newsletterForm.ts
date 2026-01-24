@@ -120,7 +120,7 @@ export function initNewsletterForm(inputId: string = 'footer-input', buttonSelec
 
   if (!successMessage) {
     successMessage = document.createElement('p');
-    successMessage.className = 'newsletter-success mt-2 text-sm text-green-600 dark:text-green-400';
+    successMessage.className = 'newsletter-success mt-2 text-sm text-green-600 dark:text-white';
     successMessage.style.display = 'none';
     emailInput.parentElement?.parentElement?.appendChild(successMessage);
   }
