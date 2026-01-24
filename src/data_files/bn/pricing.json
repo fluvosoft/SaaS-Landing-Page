@@ -20,8 +20,8 @@
       "বেসিক কাস্টমাইজেশন",
       "মাসিক নবায়ন ফি: 500 ৳"
     ],
-    "purchaseBtnTitle": "শুরু করুন",
-    "purchaseLink": "#"
+    "purchaseBtnTitle": "অর্ডার করুন",
+    "purchaseLink": "/bn/contact"
   },
 
   "professionalToolbox": {
@@ -40,8 +40,8 @@
       "বিশ্লেষণাত্মক ড্যাশবোর্ড",
       "মাসিক নবায়ন ফি: 1,000 ৳"
     ],
-    "purchaseBtnTitle": "শুরু করুন",
-    "purchaseLink": "#"
+    "purchaseBtnTitle": "অর্ডার করুন",
+    "purchaseLink": "/bn/contact"
   },
 
   "premiumKit": {
@@ -61,8 +61,8 @@
       "কাস্টম ইন্টিগ্রেশন",
       "মাসিক নবায়ন ফি: 1,500 ৳"
     ],
-    "purchaseBtnTitle": "শুরু করুন",
-    "purchaseLink": "#"
+    "purchaseBtnTitle": "অর্ডার করুন",
+    "purchaseLink": "/bn/contact"
   },
 
   "pricingTable": {

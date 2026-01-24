@@ -20,8 +20,8 @@
       "Basic customization",
       "Monthly renew fee: 500 ৳"
     ],
-    "purchaseBtnTitle": "Get Started",
-    "purchaseLink": "#"
+    "purchaseBtnTitle": "Order Now",
+    "purchaseLink": "/contact"
   },
 
   "professionalToolbox": {
@@ -40,8 +40,8 @@
       "Analytics dashboard",
       "Monthly renew fee: 1,000 ৳"
     ],
-    "purchaseBtnTitle": "Get Started",
-    "purchaseLink": "#"
+    "purchaseBtnTitle": "Order Now",
+    "purchaseLink": "/contact"
   },
 
   "premiumKit": {
@@ -61,8 +61,8 @@
       "API access",
       "Monthly renew fee: 1,500 ৳"
     ],
-    "purchaseBtnTitle": "Get Started",
-    "purchaseLink": "#"
+    "purchaseBtnTitle": "Order Now",
+    "purchaseLink": "/contact"
   },
 
   "pricingTable": {

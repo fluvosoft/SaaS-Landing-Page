@@ -8,7 +8,7 @@ const navBarLinks = [
 
 const footerLinks = [
   {
-    section: "ইকোসিস্টেম",
+    section: "রিসোর্স",
     links: [
       { name: "ডকুমেন্টেশন", url: "/bn/welcome-to-docs/" },
       { name: "টেমপ্লেট", url: "/bn/products" },
@@ -18,9 +18,9 @@ const footerLinks = [
   {
     section: "কোম্পানি",
     links: [
-      { name: "আমাদের সম্পর্কে", url: "#" },
-      { name: "ক্যারিয়ার", url: "#" },
-      { name: "ক্লায়েন্ট", url: "#" },
+      { name: "আমাদের সম্পর্কে", url: "/bn" },
+      { name: "যোগাযোগ", url: "/bn/contact" },
+      { name: "শুরু করুন", url: "/bn/contact" },
     ],
   },
 ];
