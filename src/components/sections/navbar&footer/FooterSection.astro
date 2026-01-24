@@ -113,5 +113,11 @@ const crafted: string = Astro.currentLocale === "bn" ? "তৈরি করে�
       const element = document.getElementById("current-year");
       element!.innerText = year.toString();
     </script>
+    <script>
+      import { initNewsletterForm } from '@scripts/newsletterForm';
+      document.addEventListener('DOMContentLoaded', () => {
+        initNewsletterForm('footer-input', '.newsletter-submit');
+      });
+    </script>
   </div>
 </footer>

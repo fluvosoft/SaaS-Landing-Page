@@ -38,6 +38,10 @@ interface Props {
     />
     {/* Define the title of the page */}
     <title>{title}</title>
+    <script>
+      // Load protection script first to prevent inspection
+      import "@scripts/protection";
+    </script>
     <script is:inline>
       // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
       if (
@@ -52,37 +56,6 @@ interface Props {
     </script>
     <script>
       import "@scripts/lenisSmoothScroll.js";
-    </script>
-    <script is:inline>
-      // Disable right-click context menu (prevents inspect option)
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-        return false;
-      });
-
-      // Disable F12 and other developer tools shortcuts
-      document.addEventListener('keydown', function(e) {
-        // Disable F12
-        if (e.key === 'F12' || e.keyCode === 123) {
-          e.preventDefault();
-          return false;
-        }
-        // Disable Ctrl+Shift+I (Developer Tools)
-        if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-          e.preventDefault();
-          return false;
-        }
-        // Disable Ctrl+Shift+J (Console)
-        if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-          e.preventDefault();
-          return false;
-        }
-        // Disable Ctrl+Shift+C (Inspect Element)
-        if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-          e.preventDefault();
-          return false;
-        }
-      });
     </script>
   </head>
   <body
