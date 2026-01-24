@@ -1,6 +1,94 @@
 // Client-side script for handling newsletter subscription form
 
-import { submitNewsletterSubscription, type NewsletterFormData } from '../../lib/firebase/database';
+import { initializeApp, getApps } from 'firebase/app';
+import { getDatabase, ref, push, set, get, query, orderByChild, equalTo, serverTimestamp } from 'firebase/database';
+
+// Firebase configuration - must be client-side only
+const firebaseConfig = {
+  apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY || 'AIzaSyDFZkV4GMWUT1oZLLDMyF-bwf__Czd9ZFo',
+  authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN || 'sass-landing-page-49308.firebaseapp.com',
+  databaseURL: import.meta.env.PUBLIC_FIREBASE_DATABASE_URL || 'https://sass-landing-page-49308-default-rtdb.asia-southeast1.firebasedatabase.app',
+  projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID || 'sass-landing-page-49308',
+  storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET || 'sass-landing-page-49308.firebasestorage.app',
+  messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '1039256383449',
+  appId: import.meta.env.PUBLIC_FIREBASE_APP_ID || '1:1039256383449:web:88a22916b6d37e034a33c8',
+};
+
+// Initialize Firebase client-side only
+let db: any = null;
+if (typeof window !== 'undefined') {
+  try {
+    let app;
+    if (getApps().length === 0) {
+      app = initializeApp(firebaseConfig);
+    } else {
+      app = getApps()[0];
+    }
+    db = getDatabase(app);
+  } catch (error) {
+    console.error('Firebase initialization error:', error);
+  }
+}
+
+// Newsletter subscription function
+async function submitNewsletterSubscription(email: string, source: string = 'footer'): Promise<string> {
+  if (!db) {
+    throw new Error('Firebase is not initialized. Please check your configuration.');
+  }
+
+  // Validate email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    throw new Error('Invalid email format');
+  }
+
+  const emailLower = email.toLowerCase().trim();
+
+  try {
+    // Check for duplicate email (with timeout)
+    const subscriptionsRef = ref(db, 'newsletterSubscriptions');
+    const emailQuery = query(
+      subscriptionsRef,
+      orderByChild('email'),
+      equalTo(emailLower)
+    );
+    
+    // Add timeout for the query
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Request timeout. Please try again.')), 10000)
+    );
+    
+    const snapshot = await Promise.race([get(emailQuery), timeoutPromise]) as any;
+    
+    if (snapshot.exists()) {
+      throw new Error('This email is already subscribed');
+    }
+
+    // Prepare subscription data with timestamp
+    const subscriptionData = {
+      email: emailLower,
+      timestamp: serverTimestamp(),
+      source: source,
+    };
+
+    // Push data to Realtime Database (with timeout)
+    const newSubscriptionRef = push(subscriptionsRef);
+    await Promise.race([set(newSubscriptionRef, subscriptionData), timeoutPromise]);
+    
+    return newSubscriptionRef.key || '';
+  } catch (error: any) {
+    console.error('Newsletter subscription error:', error);
+    if (error.message.includes('timeout')) {
+      throw new Error('Connection timeout. Please check your internet connection and try again.');
+    } else if (error.message.includes('PERMISSION_DENIED')) {
+      throw new Error('Permission denied. Please check Firebase security rules.');
+    } else if (error.message) {
+      throw error;
+    } else {
+      throw new Error('Failed to subscribe. Please try again later.');
+    }
+  }
+}
 
 export function initNewsletterForm(inputId: string = 'footer-input', buttonSelector: string = '.newsletter-submit') {
   const emailInput = document.getElementById(inputId) as HTMLInputElement;
@@ -61,13 +149,13 @@ export function initNewsletterForm(inputId: string = 'footer-input', buttonSelec
     submitButton.textContent = 'Subscribing...';
 
     try {
-      // Submit to Firebase
-      const subscriptionData: NewsletterFormData = {
-        email: email,
-        source: 'footer',
-      };
+      // Check if Firebase is initialized
+      if (!db) {
+        throw new Error('Firebase is not initialized. Please refresh the page and try again.');
+      }
 
-      await submitNewsletterSubscription(subscriptionData);
+      // Submit to Firebase
+      await submitNewsletterSubscription(email, 'footer');
 
       // Show success message
       successMessage.textContent = 'Thank you for subscribing!';
@@ -78,7 +166,8 @@ export function initNewsletterForm(inputId: string = 'footer-input', buttonSelec
 
     } catch (error: any) {
       // Show error message
-      errorMessage.textContent = error.message || 'An error occurred. Please try again.';
+      const errorMsg = error.message || 'An error occurred. Please try again.';
+      errorMessage.textContent = errorMsg;
       errorMessage.style.display = 'block';
       console.error('Newsletter subscription error:', error);
     } finally {
