@@ -22,8 +22,8 @@ longDescription:
   title: "Advanced Customization Solutions"
   subTitle: |
     The CF-Features F303 are designed to handle the toughest customization challenges with ease. Whether you're working on complex landing pages or unique design requirements, these features deliver the flexibility and control you need.
-  btnTitle: "Contact sales to learn more"
-  btnURL: "#"
+  btnTitle: "Order Now"
+  btnURL: "/contact"
 descriptionList:
   - title: "Flexibility and Power"
     subTitle: "Built with advanced configuration options, these features are designed to handle complex customization needs and unique requirements."

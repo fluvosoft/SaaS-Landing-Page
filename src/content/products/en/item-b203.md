@@ -22,8 +22,8 @@ longDescription:
   title: "Consistency Meets Flexibility"
   subTitle: |
     The DS-System B203 Design System Package offers robust design consistency and flexibility for web professionals, ensuring reliable visual coherence in every application, from landing pages to full websites.
-  btnTitle: "Contact sales to learn more"
-  btnURL: "#"
+  btnTitle: "Order Now"
+  btnURL: "/contact"
 descriptionList:
   - title: "Design Tokens"
     subTitle: "Comprehensive design tokens not only provide a polished look but also ensure brand consistency across all components."

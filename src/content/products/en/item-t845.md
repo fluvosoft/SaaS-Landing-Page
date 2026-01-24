@@ -22,8 +22,8 @@ longDescription:
   title: "Professional Landing Page Solutions"
   subTitle: |
     The LP-Template T845 offers unparalleled design quality and performance for modern businesses, ensuring seamless user experience and conversion optimization for your online presence.
-  btnTitle: "Contact sales to learn more"
-  btnURL: "#"
+  btnTitle: "Order Now"
+  btnURL: "/contact"
 descriptionList:
   - title: "Modern Design"
     subTitle: "Crafted with cutting-edge design principles, this template is built to create stunning visual experiences that engage visitors."

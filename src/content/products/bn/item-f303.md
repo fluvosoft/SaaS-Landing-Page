@@ -23,7 +23,8 @@ longDescription:
   subTitle: |
     Le CF-Fonctionnalités F303 est conçu pour relever les défis de personnalisation les plus difficiles avec aisance. Que vous travailliez sur des pages d'atterrissage complexes ou des exigences de design uniques, ces fonctionnalités offrent la flexibilité et le contrôle nécessaires.
   btnTitle: "Contactez le service commercial pour en savoir plus"
-  btnURL: "#"
+  btnTitle: "অর্ডার করুন"
+  btnURL: "/bn/contact"
 descriptionList:
   - title: "Flexibilité et Puissance"
     subTitle: "Construit avec des options de configuration avancées, ces fonctionnalités sont conçues pour gérer des besoins de personnalisation complexes et des exigences uniques."

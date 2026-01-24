@@ -22,8 +22,8 @@ longDescription:
   title: "Versatile UI Component Solutions"
   subTitle: |
     The UI-Components A765 Library offers unmatched versatility and convenience, making it the perfect choice for developers and designers alike. With a comprehensive selection of components, you'll always have the right element for your landing page.
-  btnTitle: "Contact sales to learn more"
-  btnURL: "#"
+  btnTitle: "Order Now"
+  btnURL: "/contact"
 descriptionList:
   - title: "Wide Variety"
     subTitle: "Includes a diverse range of component types and styles to accommodate various design needs and use cases."

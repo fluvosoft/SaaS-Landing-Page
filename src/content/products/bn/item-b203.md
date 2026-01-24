@@ -23,7 +23,8 @@ longDescription:
   subTitle: |
     Le Package DS-Système B203 offre une cohérence de design robuste et une flexibilité pour les professionnels du web, garantissant une cohérence visuelle fiable dans chaque application, des pages d'atterrissage aux sites web complets.
   btnTitle: "Contactez le service commercial pour en savoir plus"
-  btnURL: "#"
+  btnTitle: "অর্ডার করুন"
+  btnURL: "/bn/contact"
 descriptionList:
   - title: "Tokens de Design"
     subTitle: "Tokens de design complets offrent non seulement un aspect poli mais garantissent également la cohérence de la marque dans tous les composants."

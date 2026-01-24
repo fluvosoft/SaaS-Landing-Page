@@ -23,7 +23,8 @@ longDescription:
   subTitle: |
     Le LP-Template T845 offre une qualité de design et des performances inégalées pour les entreprises modernes, garantissant une expérience utilisateur fluide et une optimisation de la conversion pour votre présence en ligne.
   btnTitle: "Contactez le service commercial pour en savoir plus"
-  btnURL: "#"
+  btnTitle: "অর্ডার করুন"
+  btnURL: "/bn/contact"
 descriptionList:
   - title: "Design Moderne"
     subTitle: "Conçu avec des principes de design de pointe, ce modèle est construit pour créer des expériences visuelles époustouflantes qui engagent les visiteurs."
