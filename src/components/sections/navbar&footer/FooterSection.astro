@@ -3,19 +3,16 @@
 import FooterSocialLink from "@components/ui/links/FooterSocialLink.astro";
 import EmailFooterInput from "@components/ui/forms/input/EmailFooterInput.astro";
 import enStrings from "@utils/navigation.ts";
-import bnStrings from "@utils/bn/navigation.ts";
 import Icon from "@components/ui/icons/Icon.astro";
 import BrandLogo from "@components/BrandLogo.astro";
 import { SITE } from "@data/constants";
 
-// Select the correct translation based on the page's lang prop:
-const strings = Astro.currentLocale === "bn" ? bnStrings : enStrings;
+const strings = enStrings;
 
 // Define the variables that will be used in this component
-const sectionThreeTitle: string = Astro.currentLocale === "bn" ? "আপডেট থাকুন" : "Stay up to date";
-const sectionThreeContent: string = Astro.currentLocale === "bn" ? "সর্বশেষ টেমপ্লেট এবং এক্সক্লুসিভ অফার সম্পর্কে আপডেট থাকুন।" :
-  "Stay updated with the latest tools and exclusive deals.";
-const crafted: string = Astro.currentLocale === "bn" ? "তৈরি করেছেন" : "Crafted by";
+const sectionThreeTitle: string = "Stay up to date";
+const sectionThreeContent: string = "Stay updated with the latest tools and exclusive deals.";
+const crafted: string = "Crafted by";
 ---
 
 <footer class="w-full bg-neutral-300 dark:bg-neutral-900">

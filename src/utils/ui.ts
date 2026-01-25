@@ -1,4 +1,1 @@
-export const languages = {
-    en: "English",
-    bn: "বাংলা",
-};
+// Language utilities removed - single language (English) only

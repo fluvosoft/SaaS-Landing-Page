@@ -25,15 +25,7 @@ export default defineConfig({
   // },
   prefetch: true,
   integrations: [
-    sitemap({
-      i18n: {
-        defaultLocale: "en", // All urls that don't contain language prefix will be treated as default locale
-        locales: {
-          en: "en", // The `defaultLocale` value must present in `locales` keys
-          bn: "bn",
-        },
-      },
-    }),
+    sitemap(),
     starlight({
       title: "Lumiro Docs",
       // https://github.com/withastro/starlight/blob/main/packages/starlight/CHANGELOG.md
@@ -46,25 +38,11 @@ export default defineConfig({
           label: "English",
           lang: "en",
         },
-        de: { label: "Deutsch", lang: "de" },
-        es: { label: "Español", lang: "es" },
-        fa: { label: "Persian", lang: "fa", dir: "rtl" },
-        bn: { label: "বাংলা", lang: "bn" },
-        ja: { label: "日本語", lang: "ja" },
-        "zh-cn": { label: "简体中文", lang: "zh-CN" },
       },
       // https://starlight.astro.build/guides/sidebar/
       sidebar: [
         {
           label: "Quick Start Guides",
-          translations: {
-            de: "Schnellstartanleitungen",
-            es: "Guías de Inicio Rápido",
-            fa: "راهنمای شروع سریع",
-            bn: "দ্রুত শুরু গাইড",
-            ja: "クイックスタートガイド",
-            "zh-cn": "快速入门指南",
-          },
           autogenerate: { directory: "guides" },
         },
         {
