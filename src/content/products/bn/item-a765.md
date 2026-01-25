@@ -22,7 +22,6 @@ longDescription:
   title: "Solutions de Composants UI Polyvalentes"
   subTitle: |
     La Bibliothèque UI-Composants A765 offre une polyvalence et une commodité inégalées, ce qui en fait le choix idéal pour les développeurs et les designers. Avec une sélection complète de composants, vous aurez toujours le bon élément pour votre page d'atterrissage.
-  btnTitle: "Contactez les ventes pour en savoir plus"
   btnTitle: "অর্ডার করুন"
   btnURL: "/bn/contact"
 descriptionList:

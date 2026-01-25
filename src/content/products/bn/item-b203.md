@@ -22,7 +22,6 @@ longDescription:
   title: "La Cohérence Rencontre la Flexibilité"
   subTitle: |
     Le Package DS-Système B203 offre une cohérence de design robuste et une flexibilité pour les professionnels du web, garantissant une cohérence visuelle fiable dans chaque application, des pages d'atterrissage aux sites web complets.
-  btnTitle: "Contactez le service commercial pour en savoir plus"
   btnTitle: "অর্ডার করুন"
   btnURL: "/bn/contact"
 descriptionList:
