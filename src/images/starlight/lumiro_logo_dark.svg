@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 80" width="250" height="80" style="height: 2.5rem;" fill="none">
+  <!-- Lumiro Icon -->
+  <g transform="translate(0, 10)">
+    <rect width="60" height="60" rx="15" fill="#262626"/>
+    <path d="M15 15 L15 45 L45 45 L45 37.5 L22.5 37.5 L22.5 15 Z" fill="#FACC15"/>
+    <circle cx="52.5" cy="15" r="9" fill="#FACC15" opacity="0.3"/>
+    <circle cx="52.5" cy="15" r="6" fill="#FACC15" opacity="0.5"/>
+  </g>
+  
+  <!-- Lumiro Text - Using a simpler approach with tspan for better rendering -->
+  <text x="75" y="50" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#d4d4d4" class="main-logo-svg">
+    <tspan>Lumiro</tspan>
+  </text>
+  
+  <style>
+    [data-theme="dark"] .main-logo-svg {
+      fill: #d4d4d4;
+    }
+    .main-logo-svg {
+      fill: #d4d4d4;
+    }
+  </style>
+</svg>
