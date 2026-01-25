@@ -26,11 +26,8 @@ const footerLinks = [
 ];
 // An object of links for social icons
 const socialLinks = {
-  facebook: "https://www.facebook.com/",
-  x: "https://twitter.com/",
-  github: "https://github.com/",
-  google: "https://www.google.com/",
-  slack: "https://slack.com/",
+  facebook: "https://www.facebook.com/profile.php?id=61586723829777",
+  linkedin: "https://www.linkedin.com/company/fluvo-soft/",
 };
 
 export default {
