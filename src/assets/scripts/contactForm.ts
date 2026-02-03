@@ -33,18 +33,21 @@ if (typeof window !== 'undefined') {
 // Contact form submission function
 async function submitContactForm(data: {
   firstName: string;
-  lastName: string;
+  lastName?: string;
   email: string;
-  phone: string;
+  phone?: string;
   details: string;
+  workPreference?: string;
+  serviceNeeded?: string;
+  projectBudget?: string;
 }): Promise<string> {
   if (!db) {
     throw new Error('Firebase is not initialized. Please check your configuration.');
   }
 
-  // Validate required fields
-  if (!data.firstName || !data.lastName || !data.email || !data.phone || !data.details) {
-    throw new Error('All fields are required');
+  // Validate required fields (phone optional for new contact design)
+  if (!data.firstName || !data.email || !data.details) {
+    throw new Error('Please fill in Your Name, Email, and Additional Details');
   }
 
   // Validate email format
@@ -54,13 +57,19 @@ async function submitContactForm(data: {
   }
 
   try {
-    // Prepare submission data with timestamp
+    // Build details string with optional work preference, service, budget
+    let detailsText = data.details.trim();
+    if (data.workPreference || data.serviceNeeded || data.projectBudget) {
+      const extra = [data.workPreference, data.serviceNeeded, data.projectBudget].filter(Boolean).join(' | ');
+      detailsText = extra ? `[${extra}]\n\n${detailsText}` : detailsText;
+    }
+
     const submissionData = {
       firstName: data.firstName.trim(),
-      lastName: data.lastName.trim(),
+      lastName: (data.lastName ?? '').trim(),
       email: data.email.toLowerCase().trim(),
-      phone: data.phone.trim(),
-      details: data.details.trim(),
+      phone: (data.phone ?? '').trim(),
+      details: detailsText,
       timestamp: serverTimestamp(),
     };
 
@@ -128,16 +137,23 @@ export function initContactForm(formId: string = 'contact-form') {
         email: (formData.get('hs-email-contacts') as string) || '',
         phone: (formData.get('hs-phone-number') as string) || '',
         details: (formData.get('hs-about-contacts') as string) || '',
+        workPreference: (formData.get('hs-work-preference') as string) || '',
+        serviceNeeded: (formData.get('hs-service-needed') as string) || '',
+        projectBudget: (formData.get('hs-project-budget') as string) || '',
       };
 
       // Validate required fields
-      if (!contactData.firstName || !contactData.lastName || !contactData.email || 
-          !contactData.phone || !contactData.details) {
-        throw new Error('Please fill in all fields');
+      if (!contactData.firstName || !contactData.email || !contactData.details) {
+        throw new Error('Please fill in Your Name, Email, and Additional Details');
       }
 
       // Submit to Firebase
-      await submitContactForm(contactData);
+      await submitContactForm({
+        ...contactData,
+        workPreference: contactData.workPreference || undefined,
+        serviceNeeded: contactData.serviceNeeded || undefined,
+        projectBudget: contactData.projectBudget || undefined,
+      });
 
       // Show success message
       if (successMessage) {

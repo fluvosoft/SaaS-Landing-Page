@@ -11,48 +11,30 @@ interface Props {
 
 <astro-banner btnId={btnId}>
   <div
-    class="fixed bottom-0 start-1/2 z-50 mx-auto w-full -translate-x-1/2 transform p-6 sm:max-w-4xl"
+    class="fixed bottom-0 start-1/2 z-50 mx-auto w-full -translate-x-1/2 px-4 pb-4 sm:px-6 sm:pb-6 md:max-w-5xl lg:max-w-6xl xl:max-w-7xl"
     role="region"
-    aria-label="Informational Banner"
+    aria-label="Announcement"
   >
     <div
-      class="rounded-xl bg-neutral-800 bg-[url('/banner-pattern.svg')] bg-cover bg-center bg-no-repeat p-4 text-center shadow-xs dark:bg-neutral-200"
+      class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#171717] bg-[url('/banner-pattern.svg')] bg-cover bg-center bg-no-repeat py-4 shadow-xl ring-1 ring-black/20 sm:rounded-3xl sm:py-5 sm:px-6"
     >
-      <div class="flex items-center justify-center">
-        <div class="ml-auto">
-          {title &&
-          <p
-            class="me-2 inline-block font-medium text-neutral-50 dark:text-neutral-700"
-          >
-            {title}
-          </p>
-          }
-          <a
-            class="group inline-flex items-center gap-x-2 rounded-full border-2 border-neutral-50 backdrop-brightness-75 sm:backdrop-brightness-100 px-3 py-2 text-sm font-semibold text-neutral-50 transition duration-300 hover:border-neutral-100/70 hover:text-neutral-50/70 disabled:pointer-events-none disabled:opacity-50 dark:backdrop-brightness-100 dark:border-neutral-700 dark:text-neutral-700 dark:hover:border-neutral-700/70 dark:hover:text-neutral-800/70 dark:focus:outline-hidden"
-            href={url}
-          >
-            {btnTitle}
-            <svg
-              class="size-4 shrink-0 transition duration-300 group-hover:translate-x-1"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg
-            >
-          </a>
+      <div class="flex items-center justify-between gap-4">
+        <!-- Left: title or spacer -->
+        <div class="min-w-0 flex-1">
+          {title && (
+            <p class="text-sm font-medium text-neutral-100 sm:text-base">
+              {title}
+            </p>
+          )}
         </div>
-        <button
-          type="button"
-          class="ml-auto inline-flex items-center gap-x-2 rounded-full border border-transparent bg-gray-100 p-2 text-sm font-semibold text-gray-800 hover:bg-gray-200 disabled:pointer-events-none disabled:opacity-50 dark:bg-neutral-700 dark:text-neutral-50 dark:hover:bg-neutral-700/80 dark:hover:text-neutral-50 dark:focus:outline-hidden"
-          id={btnId}
+        <!-- Center: CTA button -->
+        <a
+          class="group shrink-0 inline-flex items-center gap-x-2 rounded-2xl border-2 border-orange-500 bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:border-orange-600 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2 focus:ring-offset-[#171717] disabled:pointer-events-none disabled:opacity-50"
+          href={url}
         >
-          <span class="sr-only">Dismiss</span>
+          {btnTitle}
           <svg
-            class="size-5 shrink-0"
+            class="size-4 shrink-0 transition duration-300 group-hover:translate-x-0.5"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -61,9 +43,36 @@ interface Props {
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+            aria-hidden="true"
           >
-        </button>
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+        <!-- Right: close button -->
+        <div class="flex flex-1 justify-end">
+          <button
+            type="button"
+            class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-transparent bg-white text-black transition-all duration-300 hover:scale-105 hover:bg-neutral-100 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#171717] disabled:pointer-events-none disabled:opacity-50"
+            id={btnId}
+            aria-label="Dismiss banner"
+          >
+            <svg
+              class="size-5 shrink-0"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>

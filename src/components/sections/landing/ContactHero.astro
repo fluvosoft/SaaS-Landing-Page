@@ -1,0 +1,75 @@
+---
+const badgeText = "We're here to help";
+const headingLine1 = "Get in touch.";
+const headingLine2 = "Let's create something that wins.";
+const description =
+  "Have a project in mind or just want to explore options? Share your goals below and we'll get back within 24 hours with next steps.";
+const ctaLabel = "Jump to contact form";
+const benefits = [
+  "Free initial consultation",
+  "Response within 24 hours",
+  "No commitment to get started",
+];
+---
+
+<section
+  id="contact-hero"
+  class="relative w-full overflow-hidden px-4 py-20 text-left sm:px-6 sm:py-24 lg:px-8 lg:py-28"
+  aria-label="Contact hero"
+>
+  <!-- Background: subtle gradient + dotted pattern -->
+  <div class="absolute inset-0 bg-gradient-to-b from-neutral-900/50 to-transparent dark:from-black/80" aria-hidden="true"></div>
+  <div
+    class="absolute inset-0 opacity-[0.12] dark:opacity-[0.06]"
+    style="background-image: radial-gradient(circle, currentColor 1.5px, transparent 1.5px); background-size: 28px 28px;"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto grid w-full max-w-(--breakpoint-2xl) gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+    <!-- Left: Copy + CTA -->
+    <div>
+      <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-400 bg-orange-500 px-4 py-2 shadow-md">
+        <span class="h-2 w-2 shrink-0 rounded-full bg-white" aria-hidden="true"></span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-white">
+          {badgeText}
+        </span>
+      </div>
+
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl lg:text-5xl xl:text-6xl lg:leading-tight">
+        {headingLine1}
+        <span class="mt-2 block font-normal text-neutral-600 dark:text-neutral-300">
+          {headingLine2}
+        </span>
+      </h1>
+
+      <p class="mt-6 text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
+        {description}
+      </p>
+
+      <a
+        href="#contact-form"
+        class="mt-8 inline-flex items-center gap-2 rounded-xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-900 dark:focus:ring-offset-black"
+      >
+        {ctaLabel}
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Right: Benefits / trust -->
+    <div class="flex flex-col justify-center lg:pl-4">
+      <ul class="space-y-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm dark:bg-neutral-800/40 lg:p-8">
+        {benefits.map((item) => (
+          <li class="flex items-center gap-3">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-500/20 text-orange-400">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 13 4 4L19 7" />
+              </svg>
+            </span>
+            <span class="text-base font-medium text-neutral-800 dark:text-neutral-200">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

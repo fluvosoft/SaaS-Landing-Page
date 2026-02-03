@@ -1,6 +1,7 @@
 ---
 // Import the necessary components
 import MainLayout from "@/layouts/MainLayout.astro";
+import ContactHero from "@components/sections/landing/ContactHero.astro";
 import ContactSection from "@components/sections/misc/ContactSection.astro";
 import { SITE } from "@data/constants";
 
@@ -32,5 +33,6 @@ const ogTitle = "Contact Us | Lumiro";
     inLanguage: "en-US",
   }}
 >
+  <ContactHero />
   <ContactSection />
 </MainLayout>
