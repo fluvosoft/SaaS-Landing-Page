@@ -7,26 +7,29 @@ import carousel4 from "@images/carosel/carosel_4.jpeg";
 import carousel5 from "@images/carosel/carosel_5.jpeg";
 
 const carouselImages = [carousel1, carousel2, carousel3, carousel4, carousel5];
-// Duplicate images for seamless infinite scroll
 const duplicatedImages = [...carouselImages, ...carouselImages];
 ---
 
-<section class="mx-auto max-w-[85rem] overflow-hidden px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+<section
+  class="mx-auto max-w-[85rem] overflow-hidden px-4 py-12 sm:px-6 sm:py-14 lg:px-8 lg:py-16 2xl:max-w-full"
+  aria-label="Image carousel"
+>
   <div class="carousel-container">
-    <div class="carousel-gradient-left"></div>
-    <div class="carousel-track">
+    <!-- Neutral edge fades (no color tint) -->
+    <div class="carousel-fade-left" aria-hidden="true"></div>
+    <div class="carousel-fade-right" aria-hidden="true"></div>
+    <div class="carousel-track" aria-live="polite">
       {duplicatedImages.map((image, index) => (
         <div class="carousel-item">
           <Image
             src={image}
             alt={`Carousel image ${(index % carouselImages.length) + 1}`}
-            class="h-full w-full object-cover"
+            class="h-full w-full object-cover transition-transform duration-500 ease-out"
             draggable="false"
           />
         </div>
       ))}
     </div>
-    <div class="carousel-gradient-right"></div>
   </div>
 </section>
 
@@ -39,52 +42,83 @@ const duplicatedImages = [...carouselImages, ...carouselImages];
 
   .carousel-track {
     display: flex;
-    gap: 1rem;
-    animation: scroll 30s linear infinite;
+    gap: 1.25rem;
+    animation: scroll 35s linear infinite;
     will-change: transform;
+    padding: 0.5rem 0;
+  }
+
+  .carousel-track:hover,
+  .carousel-track:focus-within {
+    animation-play-state: paused;
   }
 
   .carousel-item {
     flex-shrink: 0;
-    width: 300px;
-    height: 200px;
-    border-radius: 0.5rem;
+    width: 280px;
+    height: 188px;
+    border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow:
+      0 1px 3px 0 rgb(0 0 0 / 0.06),
+      0 4px 12px -2px rgb(0 0 0 / 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .carousel-item:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 4px 12px -2px rgb(0 0 0 / 0.1),
+      0 12px 24px -4px rgb(0 0 0 / 0.12);
+  }
+
+  .carousel-item:hover img {
+    transform: scale(1.03);
   }
 
   @media (min-width: 640px) {
     .carousel-item {
-      width: 400px;
-      height: 250px;
+      width: 360px;
+      height: 240px;
+      border-radius: 1.25rem;
     }
   }
 
   @media (min-width: 1024px) {
     .carousel-item {
-      width: 500px;
-      height: 300px;
+      width: 440px;
+      height: 280px;
+      border-radius: 1.5rem;
     }
   }
 
-  .carousel-gradient-left,
-  .carousel-gradient-right {
+  .carousel-fade-left,
+  .carousel-fade-right {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 150px;
+    width: 120px;
     pointer-events: none;
     z-index: 10;
   }
 
-  .carousel-gradient-left {
+  .carousel-fade-left {
     left: 0;
-    background: linear-gradient(to right, rgba(59, 130, 246, 0.3), transparent);
+    background: linear-gradient(to right, oklch(0.97 0 0 / 0.95), transparent);
   }
 
-  .carousel-gradient-right {
+  .carousel-fade-right {
     right: 0;
-    background: linear-gradient(to left, rgba(59, 130, 246, 0.3), transparent);
+    background: linear-gradient(to left, oklch(0.97 0 0 / 0.95), transparent);
+  }
+
+  :global(.dark) .carousel-fade-left {
+    background: linear-gradient(to right, oklch(0.145 0 0 / 0.95), transparent);
+  }
+
+  :global(.dark) .carousel-fade-right {
+    background: linear-gradient(to left, oklch(0.145 0 0 / 0.95), transparent);
   }
 
   @keyframes scroll {
@@ -94,9 +128,5 @@ const duplicatedImages = [...carouselImages, ...carouselImages];
     100% {
       transform: translateX(-50%);
     }
-  }
-
-  .carousel-track:hover {
-    animation-play-state: paused;
   }
 </style>

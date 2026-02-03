@@ -1,30 +1,28 @@
 ---
 // Destructure the properties from Astro.props
-const { title, url } = Astro.props;
+const { title, url, variant = "default" } = Astro.props;
 
 // Define TypeScript interface for the properties
 interface Props {
   title?: string;
   url?: string;
+  variant?: "default" | "white";
 }
 // Define CSS classes for the hyperlink button
 const baseClasses =
-  "inline-flex items-center justify-center gap-x-2 rounded-lg px-4 py-3 text-center text-sm font-medium text-neutral-600 shadow-xs outline-hidden ring-zinc-500 focus-visible:ring-3 transition duration-300";
-const borderClasses = "border border-neutral-200";
-const bgColorClasses = "bg-neutral-300";
-const hoverClasses =
-  "hover:bg-neutral-400/50 hover:text-neutral-600 active:text-neutral-700";
+  "inline-flex items-center justify-center gap-x-2 rounded-lg px-4 py-3 text-center text-sm font-medium shadow-xs outline-hidden ring-zinc-500 focus-visible:ring-3 transition duration-300";
+const defaultClasses =
+  "border border-neutral-200 bg-neutral-300 text-neutral-600 hover:bg-neutral-400/50 hover:scale-[1.02] hover:shadow-md hover:text-neutral-600 active:scale-[0.98] active:text-neutral-700 dark:border-neutral-700 dark:bg-zinc-700 dark:text-neutral-300 dark:hover:bg-zinc-600 dark:hover:scale-[1.02] dark:hover:shadow-md dark:focus:outline-hidden";
+const whiteClasses =
+  "border border-neutral-300 bg-white text-black hover:bg-neutral-100 hover:scale-[1.02] hover:shadow-md hover:text-black active:scale-[0.98] active:bg-neutral-200 dark:border-neutral-600 dark:bg-white dark:text-black dark:hover:bg-neutral-100 dark:hover:scale-[1.02] dark:hover:shadow-md dark:hover:text-black";
 const disableClasses = "disabled:pointer-events-none disabled:opacity-50";
 const fontSizeClasses = "2xl:text-base";
 const ringClasses = "ring-zinc-500";
-
-const darkClasses =
-  "dark:border-neutral-700 dark:bg-zinc-700 dark:text-neutral-300 dark:ring-zinc-200 dark:hover:bg-zinc-600 dark:focus:outline-hidden";
 ---
 
 <!-- Styled hyperlink -->
 <a
-  class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${hoverClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses} ${darkClasses}`}
+  class={`${baseClasses} ${variant === "white" ? whiteClasses : defaultClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses}`}
   href={url}
 >
   {title}

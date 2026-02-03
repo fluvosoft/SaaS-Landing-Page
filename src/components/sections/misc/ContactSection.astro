@@ -1,130 +1,197 @@
 ---
-// Import the necessary dependencies.
-import ContactIconBlock from "@components/ui/blocks/ContactIconBlock.astro";
-import TextInput from "@components/ui/forms/input/TextInput.astro";
-import EmailContactInput from "@components/ui/forms/input/EmailContactInput.astro";
-import PhoneInput from "@components/ui/forms/input/PhoneInput.astro";
-import TextAreaInput from "@components/ui/forms/input/TextAreaInput.astro";
 import Icon from "@components/ui/icons/Icon.astro";
+import enStrings from "@utils/navigation.ts";
 
-// Define the variables that will be used in this component
-const title: string = "Contact us";
-const subTitle: string =
-  "Have questions about Lumiro landing page templates? Reach out, and let's help you build your professional business landing page with modern design components.";
-const formTitle: string = "Fill in the form below";
-const formSubTitle: string = "We'll get back to you in 1-2 business days.";
+const strings = enStrings;
+const contactEmail = "support@lumiro.com";
+const contactWhatsApp = "Chat on WhatsApp";
+const contactWhatsAppUrl = "#";
+const locationLine1 = "Based in Austin, TX";
+const locationLine2 = "Serving Clients Worldwide";
+const testimonialQuote =
+  "Lumiro's expertise in landing pages played a crucial role in our app's success. Highly recommended.";
+const testimonialAuthor = "Stephany";
+const testimonialRole = "Product Manager";
 ---
 
-<!-- Contact Us -->
-<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-  <div class="mx-auto max-w-2xl lg:max-w-5xl">
-    <div class="text-center">
-      <h1
-        class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
-      >
-        {title}
-      </h1>
-      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
-        {subTitle}
-      </p>
-    </div>
+<!-- Contact Us - Two-panel design -->
+<section class="w-full px-4 py-12 sm:px-6 lg:px-8 lg:py-16" aria-labelledby="contact-heading">
+  <div class="mx-auto max-w-(--breakpoint-2xl) overflow-hidden rounded-3xl border border-neutral-200/80 bg-neutral-100/50 shadow-lg dark:border-neutral-700 dark:bg-neutral-900/50">
+    <div class="grid lg:grid-cols-12">
+      <!-- Left panel: Contact details + Connect + Testimonial -->
+      <div class="flex flex-col justify-between rounded-t-3xl border-b border-white/10 bg-neutral-800/95 p-6 backdrop-blur-sm lg:col-span-6 lg:rounded-l-3xl lg:rounded-tr-none lg:border-b-0 lg:border-r lg:border-white/10 lg:p-10">
+        <div>
+          <h2 id="contact-heading" class="text-xs font-bold uppercase tracking-widest text-white/70">
+            Contact Details
+          </h2>
+          <ul class="mt-6 space-y-3">
+            <li>
+              <a href={`mailto:${contactEmail}`} class="group flex items-center gap-4 rounded-2xl border border-white/20 bg-neutral-700/40 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-orange-500/50 hover:bg-neutral-700/60 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-800">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/30 bg-neutral-600/50 text-white transition-colors duration-200 group-hover:border-orange-500/50 group-hover:bg-orange-500/20 group-hover:text-orange-400 [&_svg]:size-5 [&_svg]:stroke-[1.5]">
+                  <Icon name="envelopeOpen" />
+                </span>
+                <div class="min-w-0 flex-1">
+                  <p class="font-semibold text-white">Email Me</p>
+                  <p class="truncate text-sm text-white/70">{contactEmail}</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href={contactWhatsAppUrl} class="group flex items-center gap-4 rounded-2xl border border-white/20 bg-neutral-700/40 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-orange-500/50 hover:bg-neutral-700/60 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-800">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/30 bg-neutral-600/50 text-white transition-colors duration-200 group-hover:border-orange-500/50 group-hover:bg-orange-500/20 group-hover:text-orange-400 [&_svg]:size-5 [&_svg]:stroke-[1.5]">
+                  <Icon name="chatBubble" />
+                </span>
+                <div class="min-w-0 flex-1">
+                  <p class="font-semibold text-white">WhatsApp</p>
+                  <p class="text-sm text-white/70">{contactWhatsApp}</p>
+                </div>
+              </a>
+            </li>
+            <li class="flex items-center gap-4 rounded-2xl border border-white/20 bg-neutral-700/40 p-4">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/30 bg-neutral-600/50 text-white [&_svg]:size-5 [&_svg]:stroke-[1.5]">
+                <Icon name="mapPin" />
+              </span>
+              <div class="min-w-0 flex-1">
+                <p class="font-semibold text-white">Location</p>
+                <p class="text-sm text-white/70">{locationLine1}</p>
+                <p class="text-sm text-white/70">{locationLine2}</p>
+              </div>
+            </li>
+          </ul>
 
-    <div class="mt-12 grid items-center gap-6 lg:grid-cols-2 lg:gap-16">
-      <div class="flex flex-col rounded-xl p-4 sm:p-6 lg:p-8">
-        <h2
-          class="mb-8 text-xl font-bold text-neutral-700 dark:text-neutral-300"
-        >
-          {formTitle}
-        </h2>
-        <!-- Form for user input with various input fields.-->
-        <!-- Each field utilizes a different input component for the specific type of input (text, email, phone, and textarea)-->
-        <form id="contact-form">
-          <div class="grid gap-4">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <TextInput
-                id="hs-firstname-contacts"
-                label="First Name"
-                name="hs-firstname-contacts"
-              />
-              <TextInput
-                id="hs-lastname-contacts"
-                label="Last Name"
-                name="hs-lastname-contacts"
-              />
+          <div class="mt-8 border-t border-white/20 pt-8">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-white/70">Connect</h3>
+            <div class="mt-4 flex gap-3">
+              <a href={strings.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/30 bg-neutral-700/50 text-white transition-all duration-200 hover:scale-105 hover:border-orange-500/50 hover:bg-orange-500/20 hover:text-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-800 [&_svg]:size-5 [&_svg]:fill-current" aria-label="LinkedIn">
+                <Icon name="linkedIn" />
+              </a>
+              <a href={strings.socialLinks.facebook} target="_blank" rel="noopener noreferrer" class="flex h-11 w-11 items-center justify-center rounded-xl border border-white/30 bg-neutral-700/50 text-white transition-all duration-200 hover:scale-105 hover:border-orange-500/50 hover:bg-orange-500/20 hover:text-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-800 [&_svg]:size-5 [&_svg]:fill-current" aria-label="Facebook">
+                <Icon name="facebook" />
+              </a>
             </div>
-            <EmailContactInput id="hs-email-contacts" />
-            <PhoneInput id="hs-phone-number" />
-            <TextAreaInput
-              id="hs-about-contacts"
-              label="Details"
-              name="hs-about-contacts"
-            />
+          </div>
+        </div>
+
+        <!-- Testimonial card -->
+        <div class="mt-8 rounded-2xl border border-white/20 bg-neutral-700/30 p-6 transition-all duration-200 hover:border-orange-500/40 hover:shadow-lg">
+          <div class="flex items-center gap-0.5" aria-hidden="true">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <svg key={i} class="h-4 w-4 shrink-0 fill-orange-500" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            ))}
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-white/90">
+            "{testimonialQuote}"
+          </p>
+          <div class="mt-4 flex items-center gap-3">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500 text-sm font-bold text-white">
+              {testimonialAuthor.slice(0, 2).toUpperCase()}
+            </div>
+            <div class="min-w-0">
+              <p class="font-semibold text-white">{testimonialAuthor}</p>
+              <p class="text-xs uppercase tracking-wider text-white/60">{testimonialRole}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right panel: Contact form -->
+      <div class="rounded-b-3xl border-t border-white/10 bg-neutral-800/95 p-6 backdrop-blur-sm lg:col-span-6 lg:rounded-r-3xl lg:rounded-bl-none lg:border-l border-white/10 lg:border-t-0 lg:p-10">
+        <h2 class="mb-6 text-lg font-bold text-white sm:text-xl">Send us a message</h2>
+        <form id="contact-form" class="space-y-5">
+          <div>
+            <label for="hs-name-contacts" class="block text-sm font-medium text-white/90">Your Name</label>
+            <input type="text" id="hs-name-contacts" name="hs-firstname-contacts" placeholder="John Doe" class="mt-1.5 block w-full rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:ring-offset-2 focus:ring-offset-neutral-800" />
+            <input type="hidden" name="hs-lastname-contacts" value="" />
+          </div>
+          <div>
+            <label for="hs-email-contacts" class="block text-sm font-medium text-white/90">Email Address</label>
+            <input type="email" id="hs-email-contacts" name="hs-email-contacts" autocomplete="email" placeholder="john@company.com" class="mt-1.5 block w-full rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:ring-offset-2 focus:ring-offset-neutral-800" />
           </div>
 
-          <!-- Success Message -->
-          <div class="success-message mt-4 rounded-lg bg-green-50 p-3 text-sm text-green-800 dark:bg-green-900/20 dark:!text-white" style="display: none;"></div>
-          
-          <!-- Error Message -->
-          <div class="error-message mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-800 dark:bg-red-900/20 dark:text-red-400" style="display: none;"></div>
-
-          <div class="mt-4 grid">
-            <button type="submit" class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-orange-400 px-4 py-3 text-sm font-bold text-neutral-50 outline-hidden ring-zinc-500 transition duration-300 hover:bg-orange-500 focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50 dark:ring-zinc-200 dark:focus:outline-hidden">
-              Send Message
-            </button>
+          <div>
+            <p class="block text-sm font-medium text-white/90">How would you like to work?</p>
+            <div class="mt-2 flex gap-2">
+              <label class="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/30 bg-neutral-700/50 px-3 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:text-white has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
+                <input type="radio" name="work-preference" value="Project-based" class="sr-only" checked />
+                <span aria-hidden="true" class="text-white/70">&gt;_</span>
+                Project-based
+              </label>
+              <label class="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/30 bg-neutral-700/50 px-3 py-3 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:text-white has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
+                <input type="radio" name="work-preference" value="Subscription" class="sr-only" />
+                <span aria-hidden="true" class="text-white/70">∞</span>
+                Subscription
+              </label>
+            </div>
+            <input type="hidden" name="hs-work-preference" id="hs-work-preference" value="Project-based" />
           </div>
 
-          <div class="mt-3 text-center">
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              {formSubTitle}
-            </p>
+          <div>
+            <p class="block text-sm font-medium text-white/90">What service do you need?</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {["UI/UX Design", "Development", "Branding", "Consulting"].map((service) => (
+                <label class="cursor-pointer rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
+                  <input type="radio" name="service-needed" value={service} class="sr-only" />
+                  {service}
+                </label>
+              ))}
+            </div>
+            <input type="hidden" name="hs-service-needed" id="hs-service-needed" value="" />
           </div>
+
+          <div>
+            <p class="block text-sm font-medium text-white/90">Project Budget (USD)</p>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {["< $2k", "$2k - $5k", "$5k - $10k", "$10k+"].map((budget) => (
+                <label class="cursor-pointer rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
+                  <input type="radio" name="project-budget" value={budget} class="sr-only" />
+                  {budget}
+                </label>
+              ))}
+            </div>
+            <input type="hidden" name="hs-project-budget" id="hs-project-budget" value="" />
+          </div>
+
+          <div>
+            <label for="hs-about-contacts" class="block text-sm font-medium text-white/90">Additional Details</label>
+            <textarea id="hs-about-contacts" name="hs-about-contacts" rows="4" placeholder="Tell us about your project goals, timeline, and any specific requirements..." class="mt-1.5 block w-full resize-y rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:ring-offset-2 focus:ring-offset-neutral-800 min-h-[100px]"></textarea>
+          </div>
+
+          <input type="hidden" name="hs-phone-number" value="" />
+
+          <p class="flex items-center gap-2 text-sm text-white/60">
+            <svg class="h-4 w-4 shrink-0 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Typical response time: 24 hours
+          </p>
+
+          <div class="success-message rounded-xl bg-green-500/20 p-4 text-sm text-green-200 ring-1 ring-green-500/30" style="display: none;"></div>
+          <div class="error-message rounded-xl bg-red-500/20 p-4 text-sm text-red-200 ring-1 ring-red-500/30" style="display: none;"></div>
+
+          <button type="submit" class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-neutral-800 disabled:opacity-50 sm:w-auto">
+            Send Inquiry
+            <svg class="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </button>
         </form>
         <script>
           import { initContactForm } from '@scripts/contactForm';
           document.addEventListener('DOMContentLoaded', () => {
             initContactForm('contact-form');
+            document.querySelectorAll('input[name="work-preference"]').forEach((el) => {
+              el.addEventListener('change', function() { document.getElementById('hs-work-preference').value = this.value; });
+            });
+            document.querySelectorAll('input[name="service-needed"]').forEach((el) => {
+              el.addEventListener('change', function() { document.getElementById('hs-service-needed').value = this.value; });
+            });
+            document.querySelectorAll('input[name="project-budget"]').forEach((el) => {
+              el.addEventListener('change', function() { document.getElementById('hs-project-budget').value = this.value; });
+            });
           });
         </script>
-      </div>
-
-      <!--ContactIconBlocks are used to display different methods of contacting, including visiting office, email, browsing knowledgebase, and FAQ.-->
-      <div class="divide-y divide-neutral-300 dark:divide-neutral-700">
-        <ContactIconBlock
-          heading="Documentation"
-          content="Browse through our comprehensive documentation and guides for Lumiro templates."
-          isLinkVisible={true}
-          linkTitle="Visit guides & tutorials"
-          linkURL="#"
-          isArrowVisible={true}
-          ><Icon name="question" />
-        </ContactIconBlock>
-
-        <ContactIconBlock
-          heading="FAQ"
-          content="Explore our FAQ for quick, clear answers about Lumiro landing page templates."
-          isLinkVisible={true}
-          linkTitle="Visit FAQ"
-          linkURL="#"
-          isArrowVisible={true}
-          ><Icon name="chatBubble" />
-        </ContactIconBlock>
-
-        <ContactIconBlock
-          heading="Visit our office"
-          content="Lumiro"
-          isAddressVisible={true}
-          addressContent="72 Union Terrace, E10 4PE London"
-          ><Icon name="mapPin" />
-        </ContactIconBlock>
-
-        <ContactIconBlock
-          heading="Contact us by email"
-          content="Prefer the written word? Drop us an email at"
-          isLinkVisible={true}
-          linkTitle="support@lumiro.com"
-          linkURL="#"
-          ><Icon name="envelopeOpen" />
-        </ContactIconBlock>
       </div>
     </div>
   </div>
