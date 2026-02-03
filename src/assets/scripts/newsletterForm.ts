@@ -3,28 +3,43 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getDatabase, ref, push, set, get, query, orderByChild, equalTo, serverTimestamp } from 'firebase/database';
 
-// Firebase configuration - must be client-side only
-const firebaseConfig = {
-  apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY || 'AIzaSyDFZkV4GMWUT1oZLLDMyF-bwf__Czd9ZFo',
-  authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN || 'sass-landing-page-49308.firebaseapp.com',
-  databaseURL: import.meta.env.PUBLIC_FIREBASE_DATABASE_URL || 'https://sass-landing-page-49308-default-rtdb.asia-southeast1.firebasedatabase.app',
-  projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID || 'sass-landing-page-49308',
-  storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET || 'sass-landing-page-49308.firebasestorage.app',
-  messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '1039256383449',
-  appId: import.meta.env.PUBLIC_FIREBASE_APP_ID || '1:1039256383449:web:88a22916b6d37e034a33c8',
-};
+// Firebase configuration from environment only (no hardcoded credentials)
+function getFirebaseConfig() {
+  const apiKey = import.meta.env.PUBLIC_FIREBASE_API_KEY;
+  const authDomain = import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN;
+  const databaseURL = import.meta.env.PUBLIC_FIREBASE_DATABASE_URL;
+  const projectId = import.meta.env.PUBLIC_FIREBASE_PROJECT_ID;
+  const storageBucket = import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET;
+  const messagingSenderId = import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID;
+  const appId = import.meta.env.PUBLIC_FIREBASE_APP_ID;
+  if (!apiKey || !authDomain || !databaseURL || !projectId || !appId) {
+    return null;
+  }
+  return {
+    apiKey,
+    authDomain,
+    databaseURL,
+    projectId,
+    storageBucket: storageBucket || '',
+    messagingSenderId: messagingSenderId || '',
+    appId,
+  };
+}
 
-// Initialize Firebase client-side only
-let db: any = null;
+// Initialize Firebase client-side only when config is available
+let db: ReturnType<typeof getDatabase> | null = null;
 if (typeof window !== 'undefined') {
   try {
-    let app;
-    if (getApps().length === 0) {
-      app = initializeApp(firebaseConfig);
-    } else {
-      app = getApps()[0];
+    const firebaseConfig = getFirebaseConfig();
+    if (firebaseConfig) {
+      let app;
+      if (getApps().length === 0) {
+        app = initializeApp(firebaseConfig);
+      } else {
+        app = getApps()[0];
+      }
+      db = getDatabase(app);
     }
-    db = getDatabase(app);
   } catch (error) {
     console.error('Firebase initialization error:', error);
   }
