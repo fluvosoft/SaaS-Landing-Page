@@ -3,11 +3,11 @@ import Icon from "@components/ui/icons/Icon.astro";
 import enStrings from "@utils/navigation.ts";
 
 const strings = enStrings;
-const contactEmail = "support@lumiro.com";
+const contactEmail = "support@fluvosoft.com";
 const contactWhatsApp = "Chat on WhatsApp";
-const contactWhatsAppUrl = "#";
-const locationLine1 = "Based in Austin, TX";
-const locationLine2 = "Serving Clients Worldwide";
+const contactWhatsAppUrl = "https://wa.me/8801762746646";
+const locationLine1 = "United City, Dhaka";
+const locationLine2 = "Bangladesh";
 const testimonialQuote =
   "Lumiro's expertise in landing pages played a crucial role in our app's success. Highly recommended.";
 const testimonialAuthor = "Stephany";
@@ -109,6 +109,10 @@ const testimonialRole = "Product Manager";
             <label for="hs-email-contacts" class="block text-sm font-medium text-white/90">Email Address</label>
             <input type="email" id="hs-email-contacts" name="hs-email-contacts" autocomplete="email" placeholder="john@company.com" class="mt-1.5 block w-full rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:ring-offset-2 focus:ring-offset-neutral-800" />
           </div>
+          <div>
+            <label for="hs-phone-contacts" class="block text-sm font-medium text-white/90">Phone</label>
+            <input type="tel" id="hs-phone-contacts" name="hs-phone-number" autocomplete="tel" placeholder="+880 1762 746646" class="mt-1.5 block w-full rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:ring-offset-2 focus:ring-offset-neutral-800" />
+          </div>
 
           <div>
             <p class="block text-sm font-medium text-white/90">How would you like to work?</p>
@@ -129,26 +133,48 @@ const testimonialRole = "Product Manager";
 
           <div>
             <p class="block text-sm font-medium text-white/90">What service do you need?</p>
-            <div class="mt-2 flex flex-wrap gap-2">
-              {["UI/UX Design", "Development", "Branding", "Consulting"].map((service) => (
+            <div class="mt-2 flex flex-wrap gap-2" id="service-options">
+              <!-- Project-based services -->
+              <div id="project-services" class="flex flex-wrap gap-2">
+                {["UI/UX Design", "Development", "Branding", "Consulting"].map((service) => (
+                  <label class="cursor-pointer rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
+                    <input type="radio" name="service-needed" value={service} class="sr-only" />
+                    {service}
+                  </label>
+                ))}
+              </div>
+              <!-- Subscription services -->
+              <div id="subscription-services" class="flex flex-wrap gap-2" style="display: none;">
                 <label class="cursor-pointer rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
-                  <input type="radio" name="service-needed" value={service} class="sr-only" />
-                  {service}
+                  <input type="radio" name="service-needed" value="Landing Page" class="sr-only" checked />
+                  Landing Page
                 </label>
-              ))}
+              </div>
             </div>
             <input type="hidden" name="hs-service-needed" id="hs-service-needed" value="" />
           </div>
 
           <div>
-            <p class="block text-sm font-medium text-white/90">Project Budget (USD)</p>
-            <div class="mt-2 flex flex-wrap gap-2">
-              {["< $2k", "$2k - $5k", "$5k - $10k", "$10k+"].map((budget) => (
-                <label class="cursor-pointer rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
-                  <input type="radio" name="project-budget" value={budget} class="sr-only" />
-                  {budget}
-                </label>
-              ))}
+            <p class="block text-sm font-medium text-white/90" id="budget-label">Project Budget (USD)</p>
+            <div class="mt-2 flex flex-wrap gap-2" id="budget-options">
+              <!-- Project-based budget -->
+              <div id="project-budget" class="flex flex-wrap gap-2">
+                {["< $2k", "$2k - $5k", "$5k - $10k", "$10k+"].map((budget) => (
+                  <label class="cursor-pointer rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
+                    <input type="radio" name="project-budget" value={budget} class="sr-only" />
+                    {budget}
+                  </label>
+                ))}
+              </div>
+              <!-- Subscription plans -->
+              <div id="subscription-budget" class="flex flex-wrap gap-2" style="display: none;">
+                {["Basic (500 ৳)", "Regular (1,000 ৳)", "Advance (1,500 ৳)"].map((plan) => (
+                  <label class="cursor-pointer rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:border-white/50 has-[:checked]:border-orange-500 has-[:checked]:bg-orange-500/20 has-[:checked]:ring-2 has-[:checked]:ring-orange-500/30 focus-within:ring-2 focus-within:ring-orange-500/30">
+                    <input type="radio" name="project-budget" value={plan} class="sr-only" />
+                    {plan}
+                  </label>
+                ))}
+              </div>
             </div>
             <input type="hidden" name="hs-project-budget" id="hs-project-budget" value="" />
           </div>
@@ -158,7 +184,6 @@ const testimonialRole = "Product Manager";
             <textarea id="hs-about-contacts" name="hs-about-contacts" rows="4" placeholder="Tell us about your project goals, timeline, and any specific requirements..." class="mt-1.5 block w-full resize-y rounded-xl border border-white/30 bg-neutral-700/50 px-4 py-3 text-white placeholder:text-white/40 transition-colors focus:border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:ring-offset-2 focus:ring-offset-neutral-800 min-h-[100px]"></textarea>
           </div>
 
-          <input type="hidden" name="hs-phone-number" value="" />
 
           <p class="flex items-center gap-2 text-sm text-white/60">
             <svg class="h-4 w-4 shrink-0 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -181,18 +206,86 @@ const testimonialRole = "Product Manager";
           import { initContactForm } from '@scripts/contactForm';
           document.addEventListener('DOMContentLoaded', () => {
             initContactForm('contact-form');
+            
+            // Get elements
+            const projectServices = document.getElementById('project-services');
+            const subscriptionServices = document.getElementById('subscription-services');
+            const projectBudget = document.getElementById('project-budget');
+            const subscriptionBudget = document.getElementById('subscription-budget');
+            const budgetLabel = document.getElementById('budget-label');
+            
+            // Function to toggle between project-based and subscription options
+            function toggleWorkPreference(isSubscription: boolean) {
+              if (isSubscription) {
+                // Show subscription options
+                if (projectServices) projectServices.style.display = 'none';
+                if (subscriptionServices) subscriptionServices.style.display = 'block';
+                if (projectBudget) projectBudget.style.display = 'none';
+                if (subscriptionBudget) subscriptionBudget.style.display = 'flex';
+                if (budgetLabel) budgetLabel.textContent = 'Our Subscription Model';
+                
+                // Set default service to Landing Page
+                const landingPageRadio = subscriptionServices?.querySelector<HTMLInputElement>('input[value="Landing Page"]');
+                if (landingPageRadio) {
+                  landingPageRadio.checked = true;
+                  const serviceHidden = document.getElementById('hs-service-needed') as HTMLInputElement | null;
+                  if (serviceHidden) serviceHidden.value = 'Landing Page';
+                }
+                
+                // Clear budget selection
+                const budgetHidden = document.getElementById('hs-project-budget') as HTMLInputElement | null;
+                if (budgetHidden) budgetHidden.value = '';
+                subscriptionBudget?.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach(radio => {
+                  radio.checked = false;
+                });
+              } else {
+                // Show project-based options
+                if (projectServices) projectServices.style.display = 'flex';
+                if (subscriptionServices) subscriptionServices.style.display = 'none';
+                if (projectBudget) projectBudget.style.display = 'flex';
+                if (subscriptionBudget) subscriptionBudget.style.display = 'none';
+                if (budgetLabel) budgetLabel.textContent = 'Project Budget (USD)';
+                
+                // Clear service selection
+                const serviceHidden = document.getElementById('hs-service-needed') as HTMLInputElement | null;
+                if (serviceHidden) serviceHidden.value = '';
+                projectServices?.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach(radio => {
+                  radio.checked = false;
+                });
+                
+                // Clear budget selection
+                const budgetHidden = document.getElementById('hs-project-budget') as HTMLInputElement | null;
+                if (budgetHidden) budgetHidden.value = '';
+                projectBudget?.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach(radio => {
+                  radio.checked = false;
+                });
+              }
+            }
+            
+            // Handle work preference changes
             document.querySelectorAll<HTMLInputElement>('input[name="work-preference"]').forEach((el) => {
               el.addEventListener('change', () => {
                 const target = document.getElementById('hs-work-preference') as HTMLInputElement | null;
                 if (target) target.value = el.value;
+                toggleWorkPreference(el.value === 'Subscription');
               });
             });
+            
+            // Initialize based on default selection
+            const defaultWorkPreference = document.querySelector<HTMLInputElement>('input[name="work-preference"]:checked');
+            if (defaultWorkPreference) {
+              toggleWorkPreference(defaultWorkPreference.value === 'Subscription');
+            }
+            
+            // Handle service selection changes
             document.querySelectorAll<HTMLInputElement>('input[name="service-needed"]').forEach((el) => {
               el.addEventListener('change', () => {
                 const target = document.getElementById('hs-service-needed') as HTMLInputElement | null;
                 if (target) target.value = el.value;
               });
             });
+            
+            // Handle budget selection changes
             document.querySelectorAll<HTMLInputElement>('input[name="project-budget"]').forEach((el) => {
               el.addEventListener('change', () => {
                 const target = document.getElementById('hs-project-budget') as HTMLInputElement | null;
