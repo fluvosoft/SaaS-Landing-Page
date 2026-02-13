@@ -9,6 +9,7 @@ const productsCollection = defineCollection({
     schema: () => z.object({
     title: z.string(),
     description: z.string(),
+    externalUrl: z.string().optional(),
     main: z.object({
       id: z.number(),
       content: z.string(),
