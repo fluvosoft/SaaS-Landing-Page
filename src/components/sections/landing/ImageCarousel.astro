@@ -6,8 +6,43 @@ import carousel3 from "@images/carosel/carosel_3.jpeg";
 import carousel4 from "@images/carosel/carosel_4.jpeg";
 import carousel5 from "@images/carosel/carosel_5.jpeg";
 
-const carouselImages = [carousel1, carousel2, carousel3, carousel4, carousel5];
+// Lumiro Theme images - using public paths
+const lumiroTheme1Path = "/carosel/lumiro _theme1.jpeg";
+const lumiroTheme2Path = "/carosel/lumiro_theme2.jpeg";
+const lumiroTheme3Path = "/carosel/lumiro_theme3.jpeg";
+const lumiroTheme4Path = "/carosel/lumiro_theme4.jpeg";
+const lumiroTheme5Path = "/carosel/lumiro_theme5.jpeg";
+const lumiroTheme6Path = "/carosel/lumiro_theme6.jpeg";
+const lumiroTheme7Path = "/carosel/lumiro_theme7.jpeg";
+const lumiroTheme8Path = "/carosel/lumiro_theme8.jpeg";
+const lumiroTheme9Path = "/carosel/lumiro_theme9.jpeg";
+const lumiroTheme10Path = "/carosel/lumiro_theme10.jpeg";
+const lumiroTheme11Path = "/carosel/lumiro_theme11.jpeg";
+const lumiroTheme12Path = "/carosel/lumiro_theme12.jpeg";
+
+// Map images to their URLs
+const lumiroThemes = [
+  { path: lumiroTheme1Path, url: "https://lumirotheme1.vercel.app/", alt: "Lumiro Theme 1 - Modern business landing page template" },
+  { path: lumiroTheme2Path, url: "https://lumirotheme2.vercel.app/", alt: "Lumiro Theme 2 - Restaurant landing page template" },
+  { path: lumiroTheme3Path, url: "https://lumirotheme3.vercel.app/", alt: "Lumiro Theme 3 - Educational platform landing page template" },
+  { path: lumiroTheme4Path, url: "https://lumirotheme4.vercel.app/", alt: "Lumiro Theme 4 - Marketing asset management landing page template" },
+  { path: lumiroTheme5Path, url: "https://lumirotheme5.vercel.app/", alt: "Lumiro Theme 5 - Startup landing page template" },
+  { path: lumiroTheme6Path, url: "https://lumirotheme6.vercel.app/", alt: "Lumiro Theme 6 - Shadcn landing page template" },
+  { path: lumiroTheme7Path, url: "https://lumirotheme7.vercel.app/", alt: "Lumiro Theme 7 - Modern landing page template" },
+  { path: lumiroTheme8Path, url: "https://lumirotheme8.vercel.app/", alt: "Lumiro Theme 8 - Modern landing page template" },
+  { path: lumiroTheme9Path, url: "https://lumirotheme9.vercel.app/", alt: "Lumiro Theme 9 - Modern landing page template" },
+  { path: lumiroTheme10Path, url: "https://lumirotheme10.vercel.app/", alt: "Lumiro Theme 10 - Modern landing page template" },
+  { path: lumiroTheme11Path, url: "https://lumirotheme11.vercel.app/", alt: "Lumiro Theme 11 - Modern landing page template" },
+  { path: lumiroTheme12Path, url: "https://lumirotheme12.vercel.app/", alt: "Lumiro Theme 12 - Modern landing page template" },
+];
+
+const carouselImages: Array<any> = [carousel1, carousel2, carousel3, carousel4, carousel5, ...lumiroThemes.map(t => t.path)];
 const duplicatedImages = [...carouselImages, ...carouselImages];
+
+// Helper function to get theme info by path
+function getThemeInfo(path: string) {
+  return lumiroThemes.find(t => t.path === path);
+}
 ---
 
 <section
@@ -19,16 +54,50 @@ const duplicatedImages = [...carouselImages, ...carouselImages];
     <div class="carousel-fade-left" aria-hidden="true"></div>
     <div class="carousel-fade-right" aria-hidden="true"></div>
     <div class="carousel-track" aria-live="polite">
-      {duplicatedImages.map((image, index) => (
-        <div class="carousel-item">
-          <Image
-            src={image}
-            alt={`Carousel image ${(index % carouselImages.length) + 1}`}
-            class="h-full w-full object-cover transition-transform duration-500 ease-out"
-            draggable="false"
-          />
-        </div>
-      ))}
+      {duplicatedImages.map((image, index) => {
+        const imageIndex = index % carouselImages.length;
+        const isStringPath = typeof image === 'string';
+        const themeInfo = isStringPath ? getThemeInfo(image) : null;
+        const hasLink = themeInfo !== null;
+        
+        return (
+          <div class="carousel-item">
+            {hasLink ? (
+              <a
+                href={themeInfo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block h-full w-full"
+              >
+                <img
+                  src={image}
+                  alt={themeInfo.alt}
+                  class="h-full w-full object-cover transition-transform duration-500 ease-out"
+                  draggable="false"
+                />
+              </a>
+            ) : (
+              <>
+                {isStringPath ? (
+                  <img
+                    src={image}
+                    alt={`Carousel image ${imageIndex + 1}`}
+                    class="h-full w-full object-cover transition-transform duration-500 ease-out"
+                    draggable="false"
+                  />
+                ) : (
+                  <Image
+                    src={image}
+                    alt={`Carousel image ${imageIndex + 1}`}
+                    class="h-full w-full object-cover transition-transform duration-500 ease-out"
+                    draggable="false"
+                  />
+                )}
+              </>
+            )}
+          </div>
+        );
+      })}
     </div>
   </div>
 </section>

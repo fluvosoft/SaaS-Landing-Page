@@ -15,36 +15,45 @@ const imageClass =
   "absolute inset-0 h-full w-full object-cover object-center transition duration-[600ms] ease-[cubic-bezier(0.45,0,0.55,1)] group-hover:scale-110";
 ---
 
-<!-- The anchor tag is the main container for the product card. When clicked, this leads to the details of the product. -->
-<a
-  href={`/products/${product.id}/`}
-  data-astro-prefetch
-  class="group relative flex h-48 items-end overflow-hidden rounded-lg shadow-xl outline-hidden ring-zinc-500 focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden md:col-span-2 md:h-80"
->
-  <!-- The product's main image -->
-  {typeof product.data.main.imgCard === 'string' ? (
-    <img
-      src={product.data.main.imgCard}
-      alt={product.data.main.imgAlt}
-      draggable={false}
-      class={imageClass}
-    />
-  ) : (
-    <Image
-      src={product.data.main.imgCard}
-      alt={product.data.main.imgAlt}
-      draggable={"false"}
-      class={imageClass}
-    />
-  )}
-  <!-- This container includes a gradient overlay over the product's image -->
-  <div
-    class="pointer-events-none absolute inset-0 bg-linear-to-t from-neutral-800 via-transparent to-transparent opacity-50"
+<!-- Product card container following the format: image with name below -->
+<div class="group md:col-span-2">
+  <a
+    href={product.data.externalUrl || `/products/${product.id}/`}
+    target={product.data.externalUrl ? "_blank" : undefined}
+    rel={product.data.externalUrl ? "noopener noreferrer" : undefined}
+    data-astro-prefetch={!product.data.externalUrl}
+    class="block overflow-hidden rounded-xl shadow-xl outline-hidden ring-zinc-500 focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden transition-transform duration-300 hover:shadow-2xl hover:-translate-y-1"
   >
-  </div>
-  <!-- This container includes product's subtitle and an SVG icon-->
-  <span
-    class="relative mb-3 ml-4 inline-block text-sm font-bold text-neutral-50 transition duration-[600ms] ease-[cubic-bezier(0.45,0,0.55,1)] group-hover:scale-110 md:ml-5 md:text-lg"
-    >{product.data.description} <Icon name="openInNew" /></span
-  >
-</a>
+    <!-- The product's main image -->
+    <div class="relative h-48 overflow-hidden md:h-80">
+      {typeof product.data.main.imgCard === 'string' ? (
+        <img
+          src={product.data.main.imgCard}
+          alt={product.data.main.imgAlt}
+          draggable={false}
+          class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+        />
+      ) : (
+        <Image
+          src={product.data.main.imgCard}
+          alt={product.data.main.imgAlt}
+          draggable={"false"}
+          class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+        />
+      )}
+    </div>
+    <!-- Product name and description below image -->
+    <div class="bg-white dark:bg-neutral-800 px-5 py-5 md:px-6 md:py-6">
+      <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100 mb-2 transition-colors group-hover:text-orange-500 dark:group-hover:text-orange-400 md:text-2xl">
+        {product.data.title}
+      </h3>
+      <p class="text-base text-neutral-600 dark:text-neutral-400 line-clamp-2 md:text-lg">
+        {product.data.description}
+      </p>
+      <div class="mt-3 flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+        <span>View Details</span>
+        <Icon name="openInNew" class="ml-2 h-4 w-4" />
+      </div>
+    </div>
+  </a>
+</div>

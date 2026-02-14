@@ -15,36 +15,45 @@ const imageClass =
   "absolute inset-0 h-full w-full object-cover object-center transition duration-[600ms] ease-[cubic-bezier(0.45,0,0.55,1)] group-hover:scale-110";
 ---
 
-<!-- A clickable card that leads to the details of the product-->
-<a
-  href={`/products/${product.id}/`}
-  data-astro-prefetch
-  class="group relative flex h-48 items-end overflow-hidden rounded-xl shadow-lg outline-hidden ring-zinc-500 focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden md:h-80"
->
-  <!-- The product's main image -->
-  {typeof product.data.main.imgCard === 'string' ? (
-    <img
-      src={product.data.main.imgCard}
-      alt={product.data.main.imgAlt}
-      draggable={false}
-      class={imageClass}
-    />
-  ) : (
-    <Image
-      src={product.data.main.imgCard}
-      alt={product.data.main.imgAlt}
-      draggable={"false"}
-      class={imageClass}
-    />
-  )}
-  <!-- An overlay gradient that sits on top of the product image-->
-  <div
-    class="pointer-events-none absolute inset-0 bg-linear-to-t from-neutral-800 via-transparent to-transparent opacity-50"
+<!-- Product card container following the format: image with name below -->
+<div class="group">
+  <a
+    href={product.data.externalUrl || `/products/${product.id}/`}
+    target={product.data.externalUrl ? "_blank" : undefined}
+    rel={product.data.externalUrl ? "noopener noreferrer" : undefined}
+    data-astro-prefetch={!product.data.externalUrl}
+    class="block overflow-hidden rounded-xl shadow-lg outline-hidden ring-zinc-500 focus-visible:ring-3 dark:ring-zinc-200 dark:focus:outline-hidden transition-transform duration-300 hover:shadow-xl hover:-translate-y-1"
   >
-  </div>
-  <!-- The product's subtitle and the anchor SVG icon-->
-  <span
-    class="relative mb-3 ml-4 inline-block text-sm font-bold text-neutral-50 transition duration-[600ms] ease-[cubic-bezier(0.45,0,0.55,1)] group-hover:scale-110 md:ml-5 md:text-lg"
-    >{product.data.description} <Icon name="openInNew" />
-  </span>
-</a>
+    <!-- The product's main image -->
+    <div class="relative h-48 overflow-hidden md:h-64">
+      {typeof product.data.main.imgCard === 'string' ? (
+        <img
+          src={product.data.main.imgCard}
+          alt={product.data.main.imgAlt}
+          draggable={false}
+          class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+        />
+      ) : (
+        <Image
+          src={product.data.main.imgCard}
+          alt={product.data.main.imgAlt}
+          draggable={"false"}
+          class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+        />
+      )}
+    </div>
+    <!-- Product name and description below image -->
+    <div class="bg-white dark:bg-neutral-800 px-4 py-4 md:px-5 md:py-5">
+      <h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-1 transition-colors group-hover:text-orange-500 dark:group-hover:text-orange-400">
+        {product.data.title}
+      </h3>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">
+        {product.data.description}
+      </p>
+      <div class="mt-2 flex items-center text-xs text-neutral-500 dark:text-neutral-400">
+        <span>View Details</span>
+        <Icon name="openInNew" class="ml-1 h-3 w-3" />
+      </div>
+    </div>
+  </a>
+</div>
