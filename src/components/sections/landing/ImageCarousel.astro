@@ -62,7 +62,7 @@ function getThemeInfo(path: string) {
         
         return (
           <div class="carousel-item">
-            {hasLink ? (
+            {hasLink && themeInfo ? (
               <a
                 href={themeInfo.url}
                 target="_blank"
